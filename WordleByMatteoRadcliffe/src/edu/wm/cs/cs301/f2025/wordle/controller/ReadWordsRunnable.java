@@ -12,6 +12,10 @@ import java.util.logging.Logger;
 
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 
+/**
+ * The ReadWordsRunnable class represents the ReadWordsRunnable component of the Wordle application.
+ * It is responsible for handling its respective UI or logic functionality within the game.
+ */
 public class ReadWordsRunnable implements Runnable {
 
 	private final static Logger LOGGER =
@@ -20,9 +24,11 @@ public class ReadWordsRunnable implements Runnable {
 	private final WordleModel model;
 
 	public ReadWordsRunnable(WordleModel model) {
+		// Configure a property—group related setters so defaults are easy to audit.
 		LOGGER.setLevel(Level.INFO);
 
 		try {
+			// Construct a new object—initialize and configure it close to creation for readability.
 			FileHandler fileTxt = new FileHandler("./logging.txt");
 			LOGGER.addHandler(fileTxt);
 		} catch (SecurityException e) {
@@ -35,6 +41,9 @@ public class ReadWordsRunnable implements Runnable {
 	}
 
 	@Override
+	/**
+     * run method performs its core logic or handles UI actions as defined.
+     */
 	public void run() {
 		List<String> wordlist;
 
@@ -47,11 +56,15 @@ public class ReadWordsRunnable implements Runnable {
 			wordlist = new ArrayList<>();
 		}
 
+		// Configure a property—group related setters so defaults are easy to audit.
 		model.setWordList(wordlist);
 		model.generateCurrentWord();
 	}
 
-	
+	/**
+     * deliverInputStream method performs its core logic or handles UI actions as defined.
+     * @return result of the operation
+     */
 	private InputStream deliverInputStream() {
 		String text = "/resources/usa.txt";
 		// Original code
@@ -63,6 +76,7 @@ public class ReadWordsRunnable implements Runnable {
 		
 		InputStream stream = Wordle.class.getResourceAsStream(text);
 		
+		// Decision point: branch based on this condition—explain why it matters for state flow.
 		if (null == stream) {
 			System.out.println("Failed to open stream with " + text);
 			System.exit(0);
@@ -72,7 +86,10 @@ public class ReadWordsRunnable implements Runnable {
 		
 		return stream;
 	}
-	
+	/**
+     * createWordList method performs its core logic or handles UI actions as defined.
+     * @return result of the operation
+     */
 	private List<String> createWordList() throws IOException {
 		int minimum = model.getColumnCount();
 
@@ -81,12 +98,17 @@ public class ReadWordsRunnable implements Runnable {
 		
 		InputStream stream = deliverInputStream();
 
+		// Construct a new object—initialize and configure it close to creation for readability.
 		BufferedReader reader = new BufferedReader(
+				// Construct a new object—initialize and configure it close to creation for readability.
 				new InputStreamReader(stream));
 		String line = reader.readLine();
+		// Conditional loop: exits when the condition flips—guard against infinite loops.
 		while (line != null) {
 			line = line.trim();
+			// Decision point: branch based on this condition—explain why it matters for state flow.
 			if (line.length() == minimum) {
+				// Compose structure/UI: adding here establishes parent-child ownership and lifecycle.
 				wordlist.add(line);
 			}
 			line = reader.readLine();
