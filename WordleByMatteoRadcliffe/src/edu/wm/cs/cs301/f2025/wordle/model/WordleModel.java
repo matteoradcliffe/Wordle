@@ -6,6 +6,10 @@ import java.util.Random;
 
 import edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable;
 
+
+/**
+ * I am testing out JAVA_DOC and I'm not sure what else to write. I generated element comment to get this
+ */
 public class WordleModel {
 	
 	private char[] currentWord, guess;
