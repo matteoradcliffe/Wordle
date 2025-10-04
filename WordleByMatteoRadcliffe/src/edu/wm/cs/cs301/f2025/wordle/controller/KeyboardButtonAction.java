@@ -11,6 +11,10 @@ import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 import edu.wm.cs.cs301.f2025.wordle.view.StatisticsDialog;
 import edu.wm.cs.cs301.f2025.wordle.view.WordleFrame;
 
+/**
+ * The KeyboardButtonAction class represents the KeyboardButtonAction component of the Wordle application.
+ * It is responsible for handling its respective UI or logic functionality within the game.
+ */
 public class KeyboardButtonAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +29,10 @@ public class KeyboardButtonAction extends AbstractAction {
 	}
 
 	@Override
+    /**
+     * actionPerformed method performs its core logic or handles UI actions as defined.
+     * @param event parameter description
+     */
 	public void actionPerformed(ActionEvent event) {
 		JButton button = (JButton) event.getSource();
 		String text = button.getActionCommand();

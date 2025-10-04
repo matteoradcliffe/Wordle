@@ -12,6 +12,10 @@ import java.util.logging.Logger;
 
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 
+/**
+ * The ReadWordsRunnable class represents the ReadWordsRunnable component of the Wordle application.
+ * It is responsible for handling its respective UI or logic functionality within the game.
+ */
 public class ReadWordsRunnable implements Runnable {
 
 	private final static Logger LOGGER =
@@ -35,6 +39,9 @@ public class ReadWordsRunnable implements Runnable {
 	}
 
 	@Override
+    /**
+     * run method performs its core logic or handles UI actions as defined.
+     */
 	public void run() {
 		List<String> wordlist;
 
@@ -52,6 +59,10 @@ public class ReadWordsRunnable implements Runnable {
 	}
 
 	
+    /**
+     * deliverInputStream method performs its core logic or handles UI actions as defined.
+     * @return result of the operation
+     */
 	private InputStream deliverInputStream() {
 		String text = "/resources/usa.txt";
 		// Original code
@@ -73,6 +84,10 @@ public class ReadWordsRunnable implements Runnable {
 		return stream;
 	}
 	
+    /**
+     * createWordList method performs its core logic or handles UI actions as defined.
+     * @return result of the operation
+     */
 	private List<String> createWordList() throws IOException {
 		int minimum = model.getColumnCount();
 
