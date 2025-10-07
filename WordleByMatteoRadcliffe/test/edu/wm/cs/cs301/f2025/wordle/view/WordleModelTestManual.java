@@ -23,8 +23,13 @@ public class WordleModelTestManual {
 		
 	}
 	
+	/**
+	 * 	//TODO Investigate failure in testTypingAndSubmittingGuess()
+	 * Manual gameplay works correctly but automated test fails likely due to timing or index flip flop.
+	 * I think this is becasue getCurrentRowNumber() returns currentRow-1.
+	 * So the games still works but the test need to be adjusted to match the models design.
+	 */
 	
-	//TODO 
 	@Test
 	public void testTypingAndSubmittingGuess() {
 		WordleModel model = new WordleModel();
@@ -76,6 +81,12 @@ public class WordleModelTestManual {
 		assertTrue(hasYellow,  "Partial guesses should be yellow");
 	}
 	
+	/**
+	 * //TODO Investigate failure in testBackspace()
+	 * after backspacing, the last typed cell should be cleared and column index decremented by one
+	 * however, test fails. last cell remains not null or column not updated
+	 * This could be becasue backspace() index proabably prevents clearing at index 0
+	 */
 	@Test
 	public void testBackspace() {
 		WordleModel model = new WordleModel();
@@ -93,7 +104,4 @@ public class WordleModelTestManual {
 		assertNull(row[1], "the second column should be cleared after backspace");
 		
 	}
-	
-	
-		
 }

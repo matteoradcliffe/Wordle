@@ -43,6 +43,12 @@ public class WordleModelTestGenerated {
     /**
      * Ensures that calling backspace() on an empty row does not throw.
      */
+    /**
+	 * //TODO Investigate failure in testBackspaceOnEmptyRowDoesNotThrow()
+	 * For this test I expected backspace() to safely do nothing when no letters are entered
+	 * instead it throws NullPointerException or IndexOutOfBoundsException when currentColumn = -1
+	 * this could be because there is no gaurd position preventing an invalid index in backspace() 
+	 */
     @Test
     public void testBackspaceOnEmptyRowDoesNotThrow() {
         assertDoesNotThrow(() -> model.backspace(),
@@ -52,6 +58,12 @@ public class WordleModelTestGenerated {
     /**
      * Simulates a valid full-row guess submission and verifies state changes.
      */
+    /**
+	 * //TODO Investigate failure in testSubmitRowAdvancesRowCounter()
+	 * I expected after row submission that current row number returns 1.
+	 * it actually returns 0 or -1 proabably due to the logic and subtracts one before returning
+	 * Like I said earlier though the ACTUAL game works fine when it comes to this feature its just the logic is different than tested. 
+	 */
     @Test
     public void testSubmitRowAdvancesRowCounter() {
         for (char c : "APPLE".toCharArray()) {
