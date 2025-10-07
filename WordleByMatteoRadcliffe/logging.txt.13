@@ -2,159 +2,39 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2025-10-07T16:18:41.074070100Z</date>
-  <millis>1759853921074</millis>
-  <nanos>70100</nanos>
-  <sequence>3</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>36</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.079574600Z</date>
-  <millis>1759853921079</millis>
-  <nanos>574600</nanos>
-  <sequence>4</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>44</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.116136900Z</date>
-  <millis>1759853921116</millis>
-  <nanos>136900</nanos>
-  <sequence>5</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>46</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.117136600Z</date>
-  <millis>1759853921117</millis>
-  <nanos>136600</nanos>
-  <sequence>6</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>45</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.118135500Z</date>
-  <millis>1759853921118</millis>
-  <nanos>135500</nanos>
-  <sequence>7</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>38</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.121136700Z</date>
-  <millis>1759853921121</millis>
-  <nanos>136700</nanos>
-  <sequence>8</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>37</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.126619800Z</date>
-  <millis>1759853921126</millis>
-  <nanos>619800</nanos>
-  <sequence>10</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>39</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.126619800Z</date>
-  <millis>1759853921126</millis>
-  <nanos>619800</nanos>
-  <sequence>9</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>35</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.130621Z</date>
-  <millis>1759853921130</millis>
-  <nanos>621000</nanos>
-  <sequence>11</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>47</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.132620200Z</date>
-  <millis>1759853921132</millis>
-  <nanos>620200</nanos>
-  <sequence>12</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>41</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.140619900Z</date>
-  <millis>1759853921140</millis>
-  <nanos>619900</nanos>
-  <sequence>14</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>42</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:18:41.139620500Z</date>
-  <millis>1759853921139</millis>
-  <nanos>620500</nanos>
+  <date>2025-10-07T16:35:18.469987300Z</date>
+  <millis>1759854918469</millis>
+  <nanos>987300</nanos>
   <sequence>13</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
   <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
   <method>run</method>
-  <thread>40</thread>
+  <thread>48</thread>
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-07T16:18:41.147620500Z</date>
-  <millis>1759853921147</millis>
-  <nanos>620500</nanos>
+  <date>2025-10-07T16:35:18.471984800Z</date>
+  <millis>1759854918471</millis>
+  <nanos>984800</nanos>
+  <sequence>14</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>50</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-07T16:35:18.478984600Z</date>
+  <millis>1759854918478</millis>
+  <nanos>984600</nanos>
   <sequence>15</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
   <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
   <method>run</method>
-  <thread>48</thread>
+  <thread>49</thread>
   <message>Created word list of 4435 words.</message>
 </record>
 </log>
