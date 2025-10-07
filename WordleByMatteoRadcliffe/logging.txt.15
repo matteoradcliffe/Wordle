@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2025-10-07T01:12:34.849613700Z</date>
+  <millis>1759799554849</millis>
+  <nanos>613700</nanos>
+  <sequence>11</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>44</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-07T01:12:34.848612600Z</date>
+  <millis>1759799554848</millis>
+  <nanos>612600</nanos>
+  <sequence>10</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>43</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-07T01:12:34.850612200Z</date>
+  <millis>1759799554850</millis>
+  <nanos>612200</nanos>
+  <sequence>12</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>45</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-07T01:12:34.852614600Z</date>
+  <millis>1759799554852</millis>
+  <nanos>614600</nanos>
+  <sequence>13</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>48</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-07T01:12:34.853613800Z</date>
+  <millis>1759799554853</millis>
+  <nanos>613800</nanos>
+  <sequence>14</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>46</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-07T01:12:34.859612800Z</date>
+  <millis>1759799554859</millis>
+  <nanos>612800</nanos>
+  <sequence>15</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>47</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+</log>

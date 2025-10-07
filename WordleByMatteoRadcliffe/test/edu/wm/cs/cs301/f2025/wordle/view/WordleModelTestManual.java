@@ -23,6 +23,8 @@ public class WordleModelTestManual {
 		
 	}
 	
+	
+	//TODO 
 	@Test
 	public void testTypingAndSubmittingGuess() {
 		WordleModel model = new WordleModel();
@@ -86,9 +88,12 @@ public class WordleModelTestManual {
 		model.backspace();
 		
 		assertEquals(0, model.getCurrentColumn(), "backspace shoulve move the cursor back by one");
+		assertTrue(model.getCurrentRowNumber() >= 0, "Row number should not be negative after typing letters.");
 		WordleResponse[] row = model.getWordleGrid()[model.getCurrentRowNumber()];
 		assertNull(row[1], "the second column should be cleared after backspace");
 		
 	}
+	
+	
 		
 }
