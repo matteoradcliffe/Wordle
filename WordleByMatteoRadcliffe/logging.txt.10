@@ -2,22 +2,34 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2025-10-07T16:35:18.345524900Z</date>
-  <millis>1759854918345</millis>
-  <nanos>524900</nanos>
+  <date>2025-10-08T18:52:58.892358Z</date>
+  <millis>1759949578892</millis>
+  <nanos>358000</nanos>
   <sequence>10</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
   <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
   <method>run</method>
-  <thread>45</thread>
+  <thread>43</thread>
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-07T16:35:18.414703300Z</date>
-  <millis>1759854918414</millis>
-  <nanos>703300</nanos>
+  <date>2025-10-08T18:52:58.900357700Z</date>
+  <millis>1759949578900</millis>
+  <nanos>357700</nanos>
   <sequence>11</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>44</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-08T18:52:58.904356800Z</date>
+  <millis>1759949578904</millis>
+  <nanos>356800</nanos>
+  <sequence>12</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
   <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
@@ -26,10 +38,22 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-07T16:35:18.443706Z</date>
-  <millis>1759854918443</millis>
-  <nanos>706000</nanos>
-  <sequence>12</sequence>
+  <date>2025-10-08T18:52:58.905867600Z</date>
+  <millis>1759949578905</millis>
+  <nanos>867600</nanos>
+  <sequence>13</sequence>
+  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
+  <level>INFO</level>
+  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
+  <method>run</method>
+  <thread>45</thread>
+  <message>Created word list of 4435 words.</message>
+</record>
+<record>
+  <date>2025-10-08T18:52:58.912876700Z</date>
+  <millis>1759949578912</millis>
+  <nanos>876700</nanos>
+  <sequence>14</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
   <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
@@ -38,39 +62,15 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-07T16:35:18.469987300Z</date>
-  <millis>1759854918469</millis>
-  <nanos>987300</nanos>
-  <sequence>13</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>48</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:35:18.471984800Z</date>
-  <millis>1759854918471</millis>
-  <nanos>984800</nanos>
-  <sequence>14</sequence>
-  <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
-  <level>INFO</level>
-  <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
-  <method>run</method>
-  <thread>50</thread>
-  <message>Created word list of 4435 words.</message>
-</record>
-<record>
-  <date>2025-10-07T16:35:18.478984600Z</date>
-  <millis>1759854918478</millis>
-  <nanos>984600</nanos>
+  <date>2025-10-08T18:52:58.914876800Z</date>
+  <millis>1759949578914</millis>
+  <nanos>876800</nanos>
   <sequence>15</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
   <class>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</class>
   <method>run</method>
-  <thread>49</thread>
+  <thread>48</thread>
   <message>Created word list of 4435 words.</message>
 </record>
 </log>

@@ -11,12 +11,18 @@ public class StatisticsTestManual {
     
     @BeforeEach
     public void setUp() throws IOException {
-    		String tmp = System.getProperty("user.home") + System.getProperty("file.separator") + "Wordle";
-    		testFile = new File(tmp, "statistics.log");
-    		if (testFile.exists()) {
-    			testFile.delete();
-    		}
-    		stats = new Statistics();
+        String tmpDir = System.getProperty("user.home") + File.separator + "Wordle";
+        File dir = new File(tmpDir);
+        if (!dir.exists()) dir.mkdirs();
+
+        testFile = new File(dir, "statistics.log");
+        if (testFile.exists()) testFile.delete();
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(testFile))) {
+            bw.write("0\n0\n0\n0\n"); 
+        }
+
+        stats = new Statistics(); 
     }
     
     @AfterEach
