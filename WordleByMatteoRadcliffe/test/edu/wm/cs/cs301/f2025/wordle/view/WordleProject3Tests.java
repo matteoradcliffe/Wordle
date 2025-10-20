@@ -61,7 +61,10 @@ public class WordleProject3Tests {
 	
 	@Test
     public void testBug4Backspace() {
-		
+		model.setCurrentColumn('A');
+		assertEquals(0, model.getCurrentColumn(), "after typing one letter current column should be 0");
+		model.backspace();
+		assertTrue(model.getCurrentColumn() >=0, "current column should never go below 0 after backspacing");
 	}
     
 	@Test
