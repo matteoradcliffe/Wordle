@@ -26,6 +26,26 @@ public class WordleProject3Tests {
 	
 	@Test
     public void testBug2Coloring() {
+		model.setWordList(Arrays.asList("BLURB"));
+		model.generateCurrentWord();
+		char[] guess = "HELLO".toCharArray();
+		char[] current = model.getCurrentWord().toCharArray();
+		
+		int yellows = 0;
+		for (int i = 0; i < 5; i++) {
+			boolean samePosition = (guess[i] == current[i]);
+			boolean exists = false;
+			if (!samePosition) {
+				for (int j = 0; j < 5; j++) {
+					if (j != i && guess[i] == current[j]) {
+						exists = true;
+						break;
+					}
+				}
+			}
+			if (exists) yellows++;
+		}
+		assertTrue(yellows <= 1, "only one 'L' should be yellow when guessing HELLO vs BLURB");
 	}
 	
 	@Test
