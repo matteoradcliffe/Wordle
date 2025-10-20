@@ -2,7 +2,7 @@ package edu.wm.cs.cs301.f2025.wordle.view;
 
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
-
+import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
@@ -24,30 +24,27 @@ public class WordleProject3Tests {
 		String word = model.getCurrentWord();
 		assertNotNull(word, "current word should not be null after initialization.");
 		assertTrue(word.length() == 5, "current word must have 5 letters");
+		assertNull(model.getWordleGrid(), "intentional fail");
 	}
 	
 	@Test
     public void testBug2Coloring() {
-		model.setWordList(Arrays.asList("BLURB"));
+		model.setWordList(Arrays.asList("APPLE"));
 		model.generateCurrentWord();
-		char[] guess = "HELLO".toCharArray();
-		char[] current = model.getCurrentWord().toCharArray();
 		
+
+		for (char c : "PAPAL".toCharArray()) {
+	        model.setCurrentColumn(c);
+	    }
+		model.setCurrentRow();
+		WordleResponse[] responses = model.getCurrentRow();
 		int yellows = 0;
-		for (int i = 0; i < 5; i++) {
-			boolean samePosition = (guess[i] == current[i]);
-			boolean exists = false;
-			if (!samePosition) {
-				for (int j = 0; j < 5; j++) {
-					if (j != i && guess[i] == current[j]) {
-						exists = true;
-						break;
-					}
-				}
+		for (WordleResponse r : responses) {
+			if (r != null && r.getChar() == 'P' && r.getBackgroundColor().equals(AppColors.YELLOW)) {
+				yellows++;
 			}
-			if (exists) yellows++;
 		}
-		assertTrue(yellows <= 1, "only one 'L' should be yellow when guessing HELLO vs BLURB");
+		assertTrue(yellows > 1, "intentionl fail: code marks Ls yellow instead of one");
 	}
 	
 	@Test
@@ -59,6 +56,8 @@ public class WordleProject3Tests {
 		String fakeGuess = "ABCDE";
 		boolean isValid = words.contains(fakeGuess.toUpperCase());
 		assertFalse(isValid, "ABCDE should not be recognized as a valid guess");
+		assertThrows(IllegalArgumentException.class, () -> model.setCurrentRow(), 
+	             "intentional fail: model accepts guesess not in list");
 	}
 	
 	@Test
@@ -67,6 +66,10 @@ public class WordleProject3Tests {
 		assertEquals(0, model.getCurrentColumn(), "after typing one letter current column should be 0");
 		model.backspace();
 		assertTrue(model.getCurrentColumn() >=0, "current column should never go below 0 after backspacing");
+		
+		model.setCurrentColumn('A');
+		model.backspace();
+		assertEquals(-1, model.getCurrentColumn(), "backspace bug: currentColumn goes below 0 (intentional fail)");
 	}
     
 	@Test
@@ -80,12 +83,17 @@ public class WordleProject3Tests {
         model.setCurrentColumn('P');
         model.setCurrentColumn('E');
         
-        WordleResponse[] row = model.getCurrentRow();
-        for (WordleResponse tile: row) {
-        		if (tile != null) {
-        			assertNotNull(tile.getBackgroundColor(),
-        					"Each tile should have a visible background color");
-        		}
+        try {
+            WordleResponse[] row = model.getCurrentRow();
+            for (WordleResponse tile : row) {
+                if (tile != null) {
+                    assertNotNull(tile.getBackgroundColor(),
+                        "each tile should have a visible background color");
+                }
+            }
+            fail("intentional fail: keyboard color readability bug still present");
+        } catch (Exception e) {
+            fail("intentional fail: keyboard color bug cause exception " + e.getClass().getSimpleName());
         }
         
 	}
