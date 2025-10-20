@@ -24,7 +24,7 @@ public class WordleProject3Tests {
 		String word = model.getCurrentWord();
 		assertNotNull(word, "current word should not be null after initialization.");
 		assertTrue(word.length() == 5, "current word must have 5 letters");
-		assertNull(model.getWordleGrid(), "intentional fail");
+		assertNotNull(model.getWordleGrid(), "no more intentional fail");
 	}
 	
 	@Test

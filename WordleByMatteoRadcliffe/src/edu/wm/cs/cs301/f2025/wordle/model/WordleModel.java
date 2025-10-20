@@ -27,6 +27,8 @@ public class WordleModel {
 	/** Field representing wordleGrid. */
 	private WordleResponse[][] wordleGrid;
 	
+	private boolean wordsLoaded = false;
+	
 	public WordleModel() {
 		this.currentColumn = -1;
 		this.currentRow = 0;
@@ -53,6 +55,8 @@ public class WordleModel {
 		new Thread(runnable).start();
 	}
 	
+	
+	
 	/**
      * initialize method performs its core logic or handles UI actions as defined.
      */
@@ -68,6 +72,10 @@ public class WordleModel {
      * generateCurrentWord method performs its core logic or handles UI actions as defined.
      */
 	public void generateCurrentWord() {
+		if (wordList == null || wordList.isEmpty()) {
+			return;
+		}
+		
 		String word = wordList.get(getRandomIndex());
 		this.currentWord = word.toUpperCase().toCharArray();
 	}
@@ -114,6 +122,7 @@ public class WordleModel {
      */
 	public void setWordList(List<String> wordList) {
 		this.wordList = wordList;
+		wordsLoaded = true;
 	}
 	
 	/**
