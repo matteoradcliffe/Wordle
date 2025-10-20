@@ -1,6 +1,8 @@
 package edu.wm.cs.cs301.f2025.wordle.view;
 
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
+
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
@@ -69,7 +71,23 @@ public class WordleProject3Tests {
     
 	@Test
     public void testBug5KeyboardColors() {
+		model.setWordList(Arrays.asList("GRAPE"));
+		model.generateCurrentWord();
 		
+		model.setCurrentColumn('G');
+        model.setCurrentColumn('R');
+        model.setCurrentColumn('A');
+        model.setCurrentColumn('P');
+        model.setCurrentColumn('E');
+        
+        WordleResponse[] row = model.getCurrentRow();
+        for (WordleResponse tile: row) {
+        		if (tile != null) {
+        			assertNotNull(tile.getBackgroundColor(),
+        					"Each tile should have a visible background color");
+        		}
+        }
+        
 	}
 	
 }
