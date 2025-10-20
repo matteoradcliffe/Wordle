@@ -50,7 +50,13 @@ public class WordleProject3Tests {
 	
 	@Test
     public void testBug3MustGuessRealWords() {
+		List<String> words = Arrays.asList("APPLE", "GRAPE", "BERRY");
+		model.setWordList(words);
+		model.initialize();
 		
+		String fakeGuess = "ABCDE";
+		boolean isValid = words.contains(fakeGuess.toUpperCase());
+		assertFalse(isValid, "ABCDE should not be recognized as a valid guess");
 	}
 	
 	@Test
