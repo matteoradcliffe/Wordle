@@ -200,15 +200,25 @@ public class WordleModel {
      * @return result of the operation
      */
 	private boolean contains(char[] currentWord, char[] guess, int column) {
-		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
-		for (int index = 0; index < currentWord.length; index++) {
-			// Decision point: branch based on this condition—explain why it matters for state flow.
-			if (index != column && guess[column] == currentWord[index]) {
-				return true;
-			}
-		}
+		char letter = guess[column];
+		int countInWord = 0;
+		int alreadyMatched = 0;
 		
-		return false;
+		// count how many of that letter are in the current word
+		for (char c : currentWord) {
+			if (c == letter) countInWord++;
+		}
+		// this'll count how many of that letter have already been guessed correctly or marked yellow earlier
+		for (int i = 0; i < column; i++) {
+	        if (guess[i] == letter &&
+	           (wordleGrid[currentRow][i] != null &&
+	            (wordleGrid[currentRow][i].getBackgroundColor().equals(AppColors.GREEN) ||
+	             wordleGrid[currentRow][i].getBackgroundColor().equals(AppColors.YELLOW)))) {
+	            alreadyMatched++;
+	        }
+	    }
+
+	    return alreadyMatched < countInWord;
 	}
 
 	/**

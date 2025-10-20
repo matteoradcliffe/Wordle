@@ -44,7 +44,7 @@ public class WordleProject3Tests {
 				yellows++;
 			}
 		}
-		assertTrue(yellows > 1, "intentionl fail: code marks Ls yellow instead of one");
+		assertEquals(1, yellows, "no more intentionl fail: only one p is yellow for APPLE and PAPAL");
 	}
 	
 	@Test
