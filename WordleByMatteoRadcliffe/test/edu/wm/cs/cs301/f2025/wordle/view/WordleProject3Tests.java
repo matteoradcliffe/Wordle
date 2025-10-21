@@ -75,28 +75,19 @@ public class WordleProject3Tests {
 	@Test
     public void testBug5KeyboardColors() {
 		model.setWordList(Arrays.asList("GRAPE"));
-		model.generateCurrentWord();
-		
-		model.setCurrentColumn('G');
-        model.setCurrentColumn('R');
-        model.setCurrentColumn('A');
-        model.setCurrentColumn('P');
-        model.setCurrentColumn('E');
-        
-        try {
-            WordleResponse[] row = model.getCurrentRow();
-            for (WordleResponse tile : row) {
-                if (tile != null) {
-                    assertNotNull(tile.getBackgroundColor(),
-                        "each tile should have a visible background color");
-                }
-            }
-            fail("intentional fail: keyboard color readability bug still present");
-        } catch (Exception e) {
-            fail("intentional fail: keyboard color bug cause exception " + e.getClass().getSimpleName());
-        }
-        
+	    model.initialize();
+	    model.setCurrentWord("GRAPE");
+
+	    for (char c : "GRAPE".toCharArray()) {
+	        model.setCurrentColumn(c);
+	    }
+	    assertDoesNotThrow(() -> model.setCurrentRow());
+
+	    WordleResponse[] row = model.getCurrentRow();
+	    for (WordleResponse tile : row) {
+	        assertNotNull(tile.getBackgroundColor(),
+	            "each tile should have a visible backgrond color");
+	    }
 	}
 	
 }
-

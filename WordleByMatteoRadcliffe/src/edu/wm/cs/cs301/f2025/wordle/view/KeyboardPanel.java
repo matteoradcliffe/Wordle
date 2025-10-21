@@ -226,32 +226,41 @@ public class KeyboardPanel {
 
 		return panel;
 	}
+	
+	private int colorRank(Color c) {
+	    if (c == null) return 0;
+	    if (AppColors.GREEN.equals(c))  return 3;
+	    if (AppColors.YELLOW.equals(c)) return 2;
+	    if (AppColors.GRAY.equals(c))   return 1;
+	    return 0;
+	}
+	
+	private Color bestTextOn(Color bg) {
+	    if (bg == null) return Color.BLACK;
+	    double r = bg.getRed() / 255.0;
+	    double g = bg.getGreen() / 255.0;
+	    double b = bg.getBlue() / 255.0;
+	    double luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+	    return luminance < 0.5 ? Color.WHITE : Color.BLACK;
+	}
 
 	public void setColor(String letter, Color backgroundColor,
 			Color foregroundColor) {
-		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
 		for (JButton button : buttons) {
-			// Decision point: branch based on this condition—explain why it matters for state flow.
-			if (button.getActionCommand().equals(letter)) {
-				Color color = button.getBackground();
-				// Decision point: branch based on this condition—explain why it matters for state flow.
-				if (color.equals(AppColors.GREEN)) {
-					// Do nothing
-				} else if (color.equals(AppColors.YELLOW)
-						&& backgroundColor.equals(AppColors.GREEN)) {
-					// Configure a property—group related setters so defaults are easy to audit.
-					button.setBackground(backgroundColor);
-					// Configure a property—group related setters so defaults are easy to audit.
-					button.setForeground(foregroundColor);
-				} else {
-					// Configure a property—group related setters so defaults are easy to audit.
-					button.setBackground(backgroundColor);
-					// Configure a property—group related setters so defaults are easy to audit.
-					button.setForeground(foregroundColor);
-				}
-				break;
-			}
-		}
+	        if (button.getActionCommand().equals(letter)) {
+	            Color currentBg = button.getBackground();
+	            // only upgrade if the new color is stronger
+	            if (colorRank(backgroundColor) >= colorRank(currentBg)) {
+	                button.setOpaque(true);
+	                button.setContentAreaFilled(true);
+	                button.setFocusPainted(false);
+	                button.setBackground(backgroundColor);
+	                button.setForeground(bestTextOn(backgroundColor));
+	                button.repaint();
+	            }
+	            break;
+	        }
+	    }
 	}
 
 	/**

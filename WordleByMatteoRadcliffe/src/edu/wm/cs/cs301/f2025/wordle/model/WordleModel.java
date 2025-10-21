@@ -197,9 +197,11 @@ public class WordleModel {
 	        throw new IllegalArgumentException("Incomplete guess: " + guessWord);
 	    }
 
-	    if (!wordList.contains(guessWord)) {
-	        throw new IllegalArgumentException("Guess not in word list: " + guessWord);
-	    }
+		boolean inList = wordList.stream().anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
+		if (!inList) {
+		    throw new IllegalArgumentException("Guess not in word list: " + guessWord);
+		}
+		
 		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
 		for (int column = 0; column < guess.length; column++) {
 			Color backgroundColor = AppColors.GRAY;
