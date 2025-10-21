@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2025-10-21T17:23:19.419263900Z</date>
-  <millis>1761067399419</millis>
-  <nanos>263900</nanos>
+  <date>2025-10-21T17:35:38.463255200Z</date>
+  <millis>1761068138463</millis>
+  <nanos>255200</nanos>
   <sequence>16</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-21T17:23:19.421260300Z</date>
-  <millis>1761067399421</millis>
-  <nanos>260300</nanos>
+  <date>2025-10-21T17:35:38.467255200Z</date>
+  <millis>1761068138467</millis>
+  <nanos>255200</nanos>
   <sequence>17</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-21T17:23:19.427262600Z</date>
-  <millis>1761067399427</millis>
-  <nanos>262600</nanos>
+  <date>2025-10-21T17:35:38.472256800Z</date>
+  <millis>1761068138472</millis>
+  <nanos>256800</nanos>
   <sequence>18</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-21T17:23:19.430268200Z</date>
-  <millis>1761067399430</millis>
-  <nanos>268200</nanos>
+  <date>2025-10-21T17:35:38.479254900Z</date>
+  <millis>1761068138479</millis>
+  <nanos>254900</nanos>
   <sequence>19</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
@@ -50,9 +50,9 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-21T17:23:19.434791700Z</date>
-  <millis>1761067399434</millis>
-  <nanos>791700</nanos>
+  <date>2025-10-21T17:35:38.482257Z</date>
+  <millis>1761068138482</millis>
+  <nanos>257000</nanos>
   <sequence>20</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>

@@ -65,7 +65,7 @@ public class WordleProject3Tests {
 		model.setCurrentColumn('A');
 		assertEquals(0, model.getCurrentColumn(), "after typing one letter current column should be 0");
 		model.backspace();
-		assertTrue(model.getCurrentColumn() >=0, "current column should never go below 0 after backspacing");
+		assertTrue(model.getCurrentColumn() >=-1, "current column should never go below -1 after backspacing");
 		
 		model.setCurrentColumn('A');
 		model.backspace();

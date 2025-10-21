@@ -159,10 +159,11 @@ public class WordleModel {
      * backspace method performs its core logic or handles UI actions as defined.
      */
 	public void backspace() {
-		wordleGrid[currentRow][currentColumn] = null;
-		guess[currentColumn] = ' ';
-		this.currentColumn--;
-		this.currentColumn = Math.max(currentColumn, 0);
+		if (currentColumn >= 0) {
+	        wordleGrid[currentRow][currentColumn] = null;
+	        guess[currentColumn] = ' ';
+	        currentColumn--;
+	    }
 	}
 	
 	/**
