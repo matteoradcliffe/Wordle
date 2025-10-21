@@ -68,8 +68,9 @@ public class WordleModelTestManual {
 	@Test
 	public void testYellowForPartiallyCorrectGuess() {
 		WordleModel model = new WordleModel();
-		model.setWordList(Arrays.asList("APPLE"));
-		model.generateCurrentWord();
+		model.setWordList(Arrays.asList("APPLE", "PAPEL"));
+		model.initialize();
+	    model.setCurrentWord("APPLE");
 		
 		for (char c : "PAPEL".toCharArray()) {
 			model.setCurrentColumn(c);

@@ -96,7 +96,7 @@ public class WordleModelTestGenerated {
      */
     @Test
     public void testGrayForIncorrectLetters() {
-        model.setWordList(Arrays.asList("APPLE"));
+        model.setWordList(Arrays.asList("APPLE", "ZZZZZ"));
         model.generateCurrentWord();
         for (char c : "ZZZZZ".toCharArray()) {
             model.setCurrentColumn(c);
@@ -114,7 +114,7 @@ public class WordleModelTestGenerated {
      */
     @Test
     public void testYellowFeedbackForMisplacedLetters() {
-        model.setWordList(Arrays.asList("APPLE"));
+        model.setWordList(Arrays.asList("APPLE", "PAPLE"));
         model.generateCurrentWord();
         for (char c : "PAPLE".toCharArray()) {
             model.setCurrentColumn(c);

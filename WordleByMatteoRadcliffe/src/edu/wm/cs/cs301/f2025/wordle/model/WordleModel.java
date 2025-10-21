@@ -79,6 +79,23 @@ public class WordleModel {
 		String word = wordList.get(getRandomIndex());
 		this.currentWord = word.toUpperCase().toCharArray();
 	}
+	
+	/**
+	 * Sets the current target word manually.
+	 * This method is more for testing purposes to make
+	 * behavior deterministic
+	 * It does not alter the word list or any color logic.
+	 *
+	 * @param word the word to use as the current target
+	 * @throws IllegalArgumentException if the word is not in the word list
+	 */
+
+	public void setCurrentWord(String word) {
+	    if (wordList == null || !wordList.contains(word.toUpperCase())) {
+	        throw new IllegalArgumentException("word must exist in the currnt word list: " + word);
+	    }
+	    currentWord = word.toUpperCase().toCharArray();
+	}
 
 	/**
      * getCurrentWord method performs its core logic or handles UI actions as defined.
@@ -169,6 +186,19 @@ public class WordleModel {
      * @return result of the operation
      */
 	public boolean setCurrentRow() {		
+		String guessWord = new String(guess).toUpperCase();
+		
+		if (wordList == null || currentWord == null) {
+			throw new IllegalStateException("word list or current word not initilize");
+			
+		}
+		if (guessWord.length() != columnCount) {
+	        throw new IllegalArgumentException("Incomplete guess: " + guessWord);
+	    }
+
+	    if (!wordList.contains(guessWord)) {
+	        throw new IllegalArgumentException("Guess not in word list: " + guessWord);
+	    }
 		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
 		for (int column = 0; column < guess.length; column++) {
 			Color backgroundColor = AppColors.GRAY;

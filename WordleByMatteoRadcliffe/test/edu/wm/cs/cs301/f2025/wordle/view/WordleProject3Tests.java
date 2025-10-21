@@ -29,7 +29,7 @@ public class WordleProject3Tests {
 	
 	@Test
     public void testBug2Coloring() {
-		model.setWordList(Arrays.asList("APPLE"));
+		model.setWordList(Arrays.asList("APPLE", "PAPAL"));
 		model.generateCurrentWord();
 		
 
@@ -99,3 +99,4 @@ public class WordleProject3Tests {
 	}
 	
 }
+
