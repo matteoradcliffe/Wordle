@@ -6,12 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 
 
 public class WordleModelTestGenerated {
-	private WordleModel model;
+	private Model model;
 
     @BeforeEach
     public void setUp() {
@@ -131,7 +132,7 @@ public class WordleModelTestGenerated {
      */
     @Test
     public void testGenerateWordWithEmptyListThrows() {
-        WordleModel emptyModel = new WordleModel();
+        Model emptyModel = new WordleModel();
         emptyModel.setWordList(Collections.emptyList());
         assertThrows(Exception.class, emptyModel::generateCurrentWord,
                 "Generating from an empty list should throw.");

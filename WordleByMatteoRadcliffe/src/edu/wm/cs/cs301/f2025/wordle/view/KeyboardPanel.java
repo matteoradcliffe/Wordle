@@ -16,7 +16,7 @@ import javax.swing.KeyStroke;
 
 import edu.wm.cs.cs301.f2025.wordle.controller.KeyboardButtonAction;
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 
 /**
  * The KeyboardPanel class represents the KeyboardPanel component of the Wordle application.
@@ -32,9 +32,9 @@ public class KeyboardPanel {
 
 	private final KeyboardButtonAction action;
 
-	private final WordleModel model;
+	private final Model model;
 
-	public KeyboardPanel(WordleFrame view, WordleModel model) {
+	public KeyboardPanel(WordleFrame view, Model model) {
 		this.model = model;
 		this.buttonIndex = 0;
 		this.buttonCount = firstRow().length + secondRow().length

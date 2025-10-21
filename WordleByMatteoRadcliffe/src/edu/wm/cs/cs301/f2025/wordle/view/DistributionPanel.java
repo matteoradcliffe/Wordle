@@ -11,7 +11,7 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 
 /**
  * The DistributionPanel class represents the DistributionPanel component of the Wordle application.
@@ -30,9 +30,9 @@ public class DistributionPanel extends JPanel {
 	/** Field representing lastValue. */
 	private int lastValue;
 	
-	private final WordleModel model;
+	private final Model model;
 
-	public DistributionPanel(WordleFrame view, WordleModel model) {
+	public DistributionPanel(WordleFrame view, Model model) {
 		this.model = model;
 		calculatePercentages();
 		// Construct a new object—initialize and configure it close to creation for readability.

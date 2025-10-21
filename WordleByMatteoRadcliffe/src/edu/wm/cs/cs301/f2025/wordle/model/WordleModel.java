@@ -10,7 +10,7 @@ import edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable;
  * The WordleModel class represents the WordleModel component of the Wordle application.
  * It is responsible for handling its respective UI or logic functionality within the game.
  */
-public class WordleModel {
+public class WordleModel implements Model {
 	
 	private char[] currentWord, guess;
 	
@@ -60,6 +60,7 @@ public class WordleModel {
 	/**
      * initialize method performs its core logic or handles UI actions as defined.
      */
+	@Override
 	public void initialize() {
 		this.wordleGrid = initializeWordleGrid();
 		this.currentColumn = -1;
@@ -71,6 +72,7 @@ public class WordleModel {
 	/**
      * generateCurrentWord method performs its core logic or handles UI actions as defined.
      */
+	@Override
 	public void generateCurrentWord() {
 		if (wordList == null || wordList.isEmpty()) {
 			return;
@@ -90,6 +92,7 @@ public class WordleModel {
 	 * @throws IllegalArgumentException if the word is not in the word list
 	 */
 
+	@Override
 	public void setCurrentWord(String word) {
 	    if (wordList == null || !wordList.contains(word.toUpperCase())) {
 	        throw new IllegalArgumentException("word must exist in the currnt word list: " + word);
@@ -101,6 +104,7 @@ public class WordleModel {
      * getCurrentWord method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public String getCurrentWord() {
 		// Construct a new object—initialize and configure it close to creation for readability.
 		return new String(currentWord);
@@ -137,6 +141,7 @@ public class WordleModel {
      * setWordList method performs its core logic or handles UI actions as defined.
      * @param wordList parameter description
      */
+	@Override
 	public void setWordList(List<String> wordList) {
 		this.wordList = wordList;
 		wordsLoaded = true;
@@ -146,6 +151,7 @@ public class WordleModel {
      * setCurrentColumn method performs its core logic or handles UI actions as defined.
      * @param c parameter description
      */
+	@Override
 	public void setCurrentColumn(char c) {
 		currentColumn++;
 		currentColumn = Math.min(currentColumn, (columnCount - 1));
@@ -158,6 +164,7 @@ public class WordleModel {
 	/**
      * backspace method performs its core logic or handles UI actions as defined.
      */
+	@Override
 	public void backspace() {
 		if (currentColumn >= 0) {
 	        wordleGrid[currentRow][currentColumn] = null;
@@ -170,6 +177,7 @@ public class WordleModel {
      * getCurrentRow method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public WordleResponse[] getCurrentRow() {
 		return wordleGrid[getCurrentRowNumber()];
 	}
@@ -178,6 +186,7 @@ public class WordleModel {
      * getCurrentRowNumber method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public int getCurrentRowNumber() {
 		return currentRow - 1;
 	}
@@ -186,6 +195,7 @@ public class WordleModel {
      * setCurrentRow method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public boolean setCurrentRow() {		
 		String guessWord = new String(guess).toUpperCase();
 		
@@ -258,6 +268,7 @@ public class WordleModel {
      * getWordleGrid method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public WordleResponse[][] getWordleGrid() {
 		return wordleGrid;
 	}
@@ -266,6 +277,7 @@ public class WordleModel {
      * getMaximumRows method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public int getMaximumRows() {
 		return maximumRows;
 	}
@@ -274,6 +286,7 @@ public class WordleModel {
      * getColumnCount method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public int getColumnCount() {
 		return columnCount;
 	}
@@ -282,6 +295,7 @@ public class WordleModel {
      * getCurrentColumn method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public int getCurrentColumn() {
 		return currentColumn;
 	}
@@ -290,6 +304,7 @@ public class WordleModel {
      * getTotalWordCount method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public int getTotalWordCount() {
 		return wordList.size();
 	}
@@ -298,24 +313,29 @@ public class WordleModel {
      * getStatistics method performs its core logic or handles UI actions as defined.
      * @return result of the operation
      */
+	@Override
 	public Statistics getStatistics() {
 		return statistics;
 	}
 	
 	
 	//Law of delimeter helpers
+	@Override
 	public void incrementTotalGamesPlayed() {
 	    statistics.incrementTotalGamesPlayed();
 	}
 
+	@Override
 	public void addWordsGuessed(int rowNumber) {
 	    statistics.addWordsGuessed(rowNumber);
 	}
+	@Override
 	public void incrementCurrentStreak() {
 	    int current = statistics.getCurrentStreak();
 	    statistics.setCurrentStreak(current + 1);
 	}
 
+	@Override
 	public void resetCurrentStreak() {
 	    statistics.setCurrentStreak(0);
 	}

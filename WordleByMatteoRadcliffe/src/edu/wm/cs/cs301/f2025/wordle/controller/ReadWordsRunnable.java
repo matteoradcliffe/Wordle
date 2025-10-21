@@ -10,7 +10,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 
 /**
  * The ReadWordsRunnable class represents the ReadWordsRunnable component of the Wordle application.
@@ -21,9 +21,9 @@ public class ReadWordsRunnable implements Runnable {
 	private final static Logger LOGGER =
 			Logger.getLogger(ReadWordsRunnable.class.getName());
 
-	private final WordleModel model;
+	private final Model model;
 
-	public ReadWordsRunnable(WordleModel model) {
+	public ReadWordsRunnable(Model model) {
 		// Configure a property—group related setters so defaults are easy to audit.
 		LOGGER.setLevel(Level.INFO);
 

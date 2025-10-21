@@ -3,6 +3,8 @@ package edu.wm.cs.cs301.f2025.wordle.view;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
+
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
@@ -10,7 +12,7 @@ import java.util.*;
 
 public class WordleProject3Tests {
 
-	private WordleModel model;
+	private Model model;
 	
 	@BeforeEach
     public void setUp() {

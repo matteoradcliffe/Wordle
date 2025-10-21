@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 
@@ -12,7 +13,7 @@ public class WordleModelTestManual {
 	
 	@Test
 	public void testInitializationGridAndWord() {
-		WordleModel model = new WordleModel();
+		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("above", "blame", "cream"));
 		model.initialize();
 		
@@ -32,7 +33,7 @@ public class WordleModelTestManual {
 	
 	@Test
 	public void testTypingAndSubmittingGuess() {
-		WordleModel model = new WordleModel();
+		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("BASES"));
 		model.generateCurrentWord();
 		
@@ -49,7 +50,7 @@ public class WordleModelTestManual {
 	
 	@Test
 	public void testGreenForCorrectGuess() {
-		WordleModel model = new WordleModel();
+		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("BASES"));
 		model.generateCurrentWord();
 		
@@ -67,7 +68,7 @@ public class WordleModelTestManual {
 	
 	@Test
 	public void testYellowForPartiallyCorrectGuess() {
-		WordleModel model = new WordleModel();
+		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("APPLE", "PAPEL"));
 		model.initialize();
 	    model.setCurrentWord("APPLE");
@@ -90,7 +91,7 @@ public class WordleModelTestManual {
 	 */
 	@Test
 	public void testBackspace() {
-		WordleModel model = new WordleModel();
+		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("BASES"));
 		model.generateCurrentWord();
 		model.setCurrentColumn('B');

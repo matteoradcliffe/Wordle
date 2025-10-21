@@ -20,7 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 /**
  * The WordleFrame class represents the WordleFrame component of the Wordle application.
  * It is responsible for handling its respective UI or logic functionality within the game.
@@ -31,11 +31,11 @@ public class WordleFrame {
 	
 	private final KeyboardPanel keyboardPanel;
 	
-	private final WordleModel model;
+	private final Model model;
 	
 	private final WordleGridPanel wordleGridPanel;
 
-	public WordleFrame(WordleModel model) {
+	public WordleFrame(Model model) {
 		this.model = model;
 		// Construct a new object—initialize and configure it close to creation for readability.
 		this.keyboardPanel = new KeyboardPanel(this, model);

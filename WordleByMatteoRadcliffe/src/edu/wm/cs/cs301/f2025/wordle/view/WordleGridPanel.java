@@ -13,7 +13,7 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 
 /**
@@ -30,9 +30,9 @@ public class WordleGridPanel extends JPanel {
 
 	private final Rectangle[][] grid;
 
-	private final WordleModel model;
+	private final Model model;
 
-	public WordleGridPanel(WordleFrame view, WordleModel model, int width) {
+	public WordleGridPanel(WordleFrame view, Model model, int width) {
 		this.model = model;
 		this.topMargin = 0;
 		this.letterWidth = 64;

@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 
 /**
  * The StatisticsDialog class represents the StatisticsDialog component of the Wordle application.
@@ -36,9 +36,9 @@ public class StatisticsDialog extends JDialog {
 	
 	private final WordleFrame view;
 	
-	private final WordleModel model;
+	private final Model model;
 
-	public StatisticsDialog(WordleFrame view, WordleModel model) {
+	public StatisticsDialog(WordleFrame view, Model model) {
 		super(view.getFrame(), "Statistics", true);
 		this.view = view;
 		this.model = model;

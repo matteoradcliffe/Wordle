@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 
 import edu.wm.cs.cs301.f2025.wordle.model.AppColors;
-import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
+import edu.wm.cs.cs301.f2025.wordle.model.Model;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 import edu.wm.cs.cs301.f2025.wordle.view.StatisticsDialog;
 import edu.wm.cs.cs301.f2025.wordle.view.WordleFrame;
@@ -21,9 +21,9 @@ public class KeyboardButtonAction extends AbstractAction {
 	
 	private final WordleFrame view;
 	
-	private final WordleModel model;
+	private final Model model;
 
-	public KeyboardButtonAction(WordleFrame view, WordleModel model) {
+	public KeyboardButtonAction(WordleFrame view, Model model) {
 		this.view = view;
 		this.model = model;
 	}
