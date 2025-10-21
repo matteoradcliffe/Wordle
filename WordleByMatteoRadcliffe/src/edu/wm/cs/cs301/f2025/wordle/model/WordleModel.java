@@ -301,5 +301,6 @@ public class WordleModel {
 	public Statistics getStatistics() {
 		return statistics;
 	}
+	
 
 }
