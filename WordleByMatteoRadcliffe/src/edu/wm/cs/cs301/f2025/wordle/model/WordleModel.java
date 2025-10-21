@@ -302,5 +302,22 @@ public class WordleModel {
 		return statistics;
 	}
 	
+	
+	//Law of delimeter helpers
+	public void incrementTotalGamesPlayed() {
+	    statistics.incrementTotalGamesPlayed();
+	}
+
+	public void addWordsGuessed(int rowNumber) {
+	    statistics.addWordsGuessed(rowNumber);
+	}
+	public void incrementCurrentStreak() {
+	    int current = statistics.getCurrentStreak();
+	    statistics.setCurrentStreak(current + 1);
+	}
+
+	public void resetCurrentStreak() {
+	    statistics.setCurrentStreak(0);
+	}
 
 }

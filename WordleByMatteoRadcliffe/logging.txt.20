@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2025-10-21T19:11:04.217224800Z</date>
-  <millis>1761073864217</millis>
-  <nanos>224800</nanos>
+  <date>2025-10-21T19:18:55.851195700Z</date>
+  <millis>1761074335851</millis>
+  <nanos>195700</nanos>
   <sequence>19</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Created word list of 4435 words.</message>
 </record>
 <record>
-  <date>2025-10-21T19:11:04.223500500Z</date>
-  <millis>1761073864223</millis>
-  <nanos>500500</nanos>
+  <date>2025-10-21T19:18:55.855683500Z</date>
+  <millis>1761074335855</millis>
+  <nanos>683500</nanos>
   <sequence>20</sequence>
   <logger>edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable</logger>
   <level>INFO</level>
