@@ -235,6 +235,7 @@ public class WordleModel implements Model {
 		return currentRow < maximumRows;
 	}
 	
+	
 	/**
      * contains method performs its core logic or handles UI actions as defined.
      * @param currentWord parameter description

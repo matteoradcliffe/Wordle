@@ -17,7 +17,6 @@ import edu.wm.cs.cs301.f2025.wordle.view.WordleFrame;
  */
 public class KeyboardButtonAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
 	
 	private final WordleFrame view;
 	
@@ -27,6 +26,7 @@ public class KeyboardButtonAction extends AbstractAction {
 		this.view = view;
 		this.model = model;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -51,6 +51,7 @@ public class KeyboardButtonAction extends AbstractAction {
 	private void processEnter() {
 	    if (model.getCurrentColumn() < model.getColumnCount() - 1) return;
 
+	    
 	    boolean moreRows = model.setCurrentRow();
 	    WordleResponse[] row = model.getCurrentRow();
 	    int greens = updateKeyboardColors(row);
@@ -61,9 +62,12 @@ public class KeyboardButtonAction extends AbstractAction {
 	        handleLoss();
 	    } else {
 	        view.repaintWordleGridPanel();
+	        
 	    }
+	    
 	}
 
+	
 	private int updateKeyboardColors(WordleResponse[] row) {
 	    int greens = 0;
 	    for (WordleResponse r : row) {
@@ -73,6 +77,8 @@ public class KeyboardButtonAction extends AbstractAction {
 	    return greens;
 	}
 
+	
+	
 	private void handleWin() {
 		view.repaintWordleGridPanel();
 	    model.incrementTotalGamesPlayed();
@@ -81,6 +87,8 @@ public class KeyboardButtonAction extends AbstractAction {
 	    new StatisticsDialog(view, model);
 	}
 
+	
+	
 	private void handleLoss() {
 		view.repaintWordleGridPanel();
 	    model.incrementTotalGamesPlayed();

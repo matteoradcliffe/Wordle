@@ -19,12 +19,14 @@ import java.util.logging.*;
  */
 public class Statistics {
 	
+	
 	private int currentStreak, longestStreak, totalGamesPlayed;
 	
 	/** Field representing wordsGuessed. */
 	private List<Integer> wordsGuessed;
 	
 	private String path, log;
+	
 
 	private static final Logger LOG = Logger.getLogger(Statistics.class.getName());
 	private final ExecutorService ioExecutor = Executors.newSingleThreadExecutor(r -> {
@@ -70,6 +72,7 @@ public class Statistics {
 		}
 	}
 	
+	
 	private void readStatisticsAsync() {
 	    LOG.info(() -> "Starting async load of statistics from " + path + log);
 	    try {
@@ -82,6 +85,7 @@ public class Statistics {
 	        loadLatch.countDown(); 
 	    }
 	}
+	
 	
 	/**
      * writeStatistics method performs its core logic or handles UI actions as defined.
@@ -125,6 +129,8 @@ public class Statistics {
 		}
 		LOG.info("Statistics write completed successfully.");
 	}
+	
+	
 
 	/**
      * getCurrentStreak method performs its core logic or handles UI actions as defined.
@@ -162,6 +168,8 @@ public class Statistics {
 	public int getTotalGamesPlayed() {
 		return totalGamesPlayed;
 	}
+	
+	
 	/**
      * incrementTotalGamesPlayed method performs its core logic or handles UI actions as defined.
      */
@@ -177,6 +185,8 @@ public class Statistics {
 	public List<Integer> getWordsGuessed() {
 		return wordsGuessed;
 	}
+	
+	
 	/**
      * addWordsGuessed method performs its core logic or handles UI actions as defined.
      * @param wordCount parameter description
@@ -186,6 +196,7 @@ public class Statistics {
 		// Compose structure/UI: adding here establishes parent-child ownership and lifecycle.
 		this.wordsGuessed.add(wordCount);
 	}
+	
 	
 	public void shutdown() {
 	    try {

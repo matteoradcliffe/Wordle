@@ -87,8 +87,7 @@ public class WordleProject3Tests {
 
 	    WordleResponse[] row = model.getCurrentRow();
 	    for (WordleResponse tile : row) {
-	        assertNotNull(tile.getBackgroundColor(),
-	            "each tile should have a visible backgrond color");
+	        assertNotNull(tile.getBackgroundColor(),"each tile should have a visible backgrond color");
 	    }
 	}
 	

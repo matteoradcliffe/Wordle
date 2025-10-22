@@ -17,10 +17,10 @@ public class Wordle implements Runnable {
     
 	public static void main(String[] args) {
 	
-		// Determine mode
+		// determine mode
         String mode = (args != null && args.length > 0)? args[0].trim().toLowerCase(): "random";
 
-        // Choose model
+        // chose model
         Model selectedModel;
         switch (mode) {
             case "absurdle":
@@ -47,7 +47,7 @@ public class Wordle implements Runnable {
      * run method performs its core logic or handles UI actions as defined.
      */
 	public void run() {
-		// Construct a new object—initialize and configure it close to creation for readability.
+		// construct a new object and it close to creation
 		new WordleFrame(model);
 	}
 

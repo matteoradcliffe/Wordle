@@ -16,6 +16,8 @@ public class AbsurdleModel implements Model {
     private char[] guess = new char[columnCount];
     private WordleResponse[][] grid = new WordleResponse[maximumRows][columnCount];
     private Statistics stats = new Statistics();
+    
+    
 
     @Override
     public void initialize() {
@@ -24,6 +26,7 @@ public class AbsurdleModel implements Model {
         // 2. current possible dict
         // 3. reset row/colum counters
     }
+    
 
     @Override
     public void generateCurrentWord() {
@@ -38,6 +41,8 @@ public class AbsurdleModel implements Model {
 
     @Override
     public String getCurrentWord() {
+    	
+    	
         // If only one possible word remains, return it.
         // if not/Otherwise, return placeholder or null.
         return null;
@@ -47,6 +52,7 @@ public class AbsurdleModel implements Model {
     public void setWordList(List<String> wordList) {
         // full dict and filtered wordList
         // current possible anf full dict copy
+    	
         this.fullDictionary = wordList;
         this.currentPossible = new ArrayList<>(wordList);
     }
@@ -56,12 +62,14 @@ public class AbsurdleModel implements Model {
         // 1. Increment currentColumn
         // 2. store character in guess array
         // 3. Fill grid[currentRow][currentColumn]
+    	
         currentColumn++;
         currentColumn = Math.min(currentColumn, columnCount - 1);
         guess[currentColumn] = c;
         grid[currentRow][currentColumn] = new WordleResponse(Character.toUpperCase(c), Color.WHITE, Color.BLACK);
     }
 
+    
     @Override
     public void backspace() {
         // If currentColumn >= 0, clear last char and move back.
@@ -74,6 +82,7 @@ public class AbsurdleModel implements Model {
 
     @Override
     public WordleResponse[] getCurrentRow() {
+    	
         // return the current rows responses
         return grid[Math.max(0, currentRow)];
     }
@@ -84,6 +93,8 @@ public class AbsurdleModel implements Model {
         return currentRow;
     }
 
+    
+    
     @Override
     public boolean setCurrentRow() {
         // 1. current possible by feedback pattern for this guess
@@ -129,6 +140,7 @@ public class AbsurdleModel implements Model {
     public void incrementTotalGamesPlayed() {
         //stats.incrementTotalGamesPlayed();
     }
+    
 
     @Override
     public void addWordsGuessed(int rowNumber) {
