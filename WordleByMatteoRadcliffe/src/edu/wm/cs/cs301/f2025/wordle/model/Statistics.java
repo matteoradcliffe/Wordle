@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.concurrent.*;
+import java.util.logging.*;
+
 /**
  * The Statistics class represents the Statistics component of the Wordle application.
  * It is responsible for handling its respective UI or logic functionality within the game.
@@ -22,13 +25,22 @@ public class Statistics {
 	private List<Integer> wordsGuessed;
 	
 	private String path, log;
+
+	private static final Logger LOG = Logger.getLogger(Statistics.class.getName());
+	private final ExecutorService ioExecutor = Executors.newSingleThreadExecutor(r -> {
+	    Thread t = new Thread(r, "statistics-io");
+	    t.setDaemon(true);
+	    return t;
+	});
+	private final CountDownLatch loadLatch = new CountDownLatch(1);
+	private volatile boolean loaded = false;
 	
 	public Statistics() {
 		this.wordsGuessed = new ArrayList<>();
 		String fileSeparator = System.getProperty("file.separator");
 		this.path = System.getProperty("user.home") + fileSeparator + "Wordle";
 		this.log = fileSeparator + "statistics.log";
-		readStatistics();
+		ioExecutor.submit(this::readStatisticsAsync);
 	}
 	
 	/**
@@ -54,13 +66,33 @@ public class Statistics {
 			this.longestStreak = 0;
 			this.totalGamesPlayed = 0;
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.log(Level.WARNING, "Failed to read statistics file.", e);
 		}
 	}
+	
+	private void readStatisticsAsync() {
+	    LOG.info(() -> "Starting async load of statistics from " + path + log);
+	    try {
+	        readStatistics(); 
+	        loaded = true;
+	        LOG.info("Statistics loaded successfully.");
+	    } catch (Exception e) {
+	        LOG.log(Level.WARNING, "Error loading statistics asynchronously", e);
+	    } finally {
+	        loadLatch.countDown(); 
+	    }
+	}
+	
 	/**
      * writeStatistics method performs its core logic or handles UI actions as defined.
      */
 	public void writeStatistics() {
+		try {
+		    loadLatch.await(3, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+		    Thread.currentThread().interrupt();
+		}
+		LOG.info("Writing statistics data to file...");
 		try {
 			// Construct a new object—initialize and configure it close to creation for readability.
 			File file = new File(path);
@@ -89,8 +121,9 @@ public class Statistics {
 			bw.flush();
 			bw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.log(Level.WARNING, "Failed to write statistics file.", e);
 		}
+		LOG.info("Statistics write completed successfully.");
 	}
 
 	/**
@@ -152,6 +185,16 @@ public class Statistics {
 	public void addWordsGuessed(int wordCount) {
 		// Compose structure/UI: adding here establishes parent-child ownership and lifecycle.
 		this.wordsGuessed.add(wordCount);
+	}
+	
+	public void shutdown() {
+	    try {
+	        writeStatistics();
+	        ioExecutor.shutdown();
+	        ioExecutor.awaitTermination(3, TimeUnit.SECONDS);
+	    } catch (InterruptedException e) {
+	        Thread.currentThread().interrupt();
+	    }
 	}
 
 }
