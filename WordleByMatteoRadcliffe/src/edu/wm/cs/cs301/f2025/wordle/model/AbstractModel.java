@@ -49,4 +49,16 @@ public abstract class AbstractModel implements Model{
 			
 		
 	}
+	
+	@Override
+	public WordleResponse[] getCurrentRow() {
+		return grid[currentRow];
+	}
+	
+	@Override
+	public int getCurrentRowNumber() {
+		return currentRow;
+	}
+	
+	
 }
