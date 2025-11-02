@@ -6,69 +6,16 @@ import java.util.Random;
 
 import edu.wm.cs.cs301.f2025.wordle.controller.ReadWordsRunnable;
 
+
 /**
  * The WordleModel class represents the WordleModel component of the Wordle application.
  * It is responsible for handling its respective UI or logic functionality within the game.
  */
-public class WordleModel implements Model {
-	
-	private char[] currentWord, guess;
-	
-	private final int columnCount, maximumRows;
-	private int currentColumn, currentRow;
-
-	/** Field representing wordList. */
-	private List<String> wordList;
-	
-	private final Random random;
-	
-	private final Statistics statistics;
-	
-	/** Field representing wordleGrid. */
-	private WordleResponse[][] wordleGrid;
-	
-	private boolean wordsLoaded = false;
-	
-	public WordleModel() {
-		this.currentColumn = -1;
-		this.currentRow = 0;
-		this.columnCount = 5;
-		this.maximumRows = 6;
-		// Construct a new object—initialize and configure it close to creation for readability.
-		this.random = new Random();
-		
-		createWordList();
-		
-		this.wordleGrid = initializeWordleGrid();
-		this.guess = new char[columnCount];
-		// Construct a new object—initialize and configure it close to creation for readability.
-		this.statistics = new Statistics();
-	}
-	
-	/**
-     * createWordList method performs its core logic or handles UI actions as defined.
-     */
-	private void createWordList() {
-		// Construct a new object—initialize and configure it close to creation for readability.
-		ReadWordsRunnable runnable = new ReadWordsRunnable(this);
-		// Construct a new object—initialize and configure it close to creation for readability.
-		new Thread(runnable).start();
-	}
+public class WordleModel extends AbstractModel {
+	private char[] currentWord;
+	private final Random random = new Random();
 	
 	
-	
-	/**
-     * initialize method performs its core logic or handles UI actions as defined.
-     */
-	@Override
-	public void initialize() {
-		this.wordleGrid = initializeWordleGrid();
-		this.currentColumn = -1;
-		this.currentRow = 0;
-		generateCurrentWord();
-		this.guess = new char[columnCount];
-	}
-
 	/**
      * generateCurrentWord method performs its core logic or handles UI actions as defined.
      */
@@ -77,10 +24,10 @@ public class WordleModel implements Model {
 		if (wordList == null || wordList.isEmpty()) {
 			return;
 		}
-		
-		String word = wordList.get(getRandomIndex());
-		this.currentWord = word.toUpperCase().toCharArray();
+		String word = wordList.get(random.nextInt(wordList.size()));
+		currentWord = word.toUpperCase().toCharArray();
 	}
+	
 	
 	/**
 	 * Sets the current target word manually.
@@ -91,7 +38,6 @@ public class WordleModel implements Model {
 	 * @param word the word to use as the current target
 	 * @throws IllegalArgumentException if the word is not in the word list
 	 */
-
 	@Override
 	public void setCurrentWord(String word) {
 	    if (wordList == null || !wordList.contains(word.toUpperCase())) {
@@ -100,6 +46,7 @@ public class WordleModel implements Model {
 	    currentWord = word.toUpperCase().toCharArray();
 	}
 
+	
 	/**
      * getCurrentWord method performs its core logic or handles UI actions as defined.
      * @return result of the operation
@@ -110,87 +57,7 @@ public class WordleModel implements Model {
 		return new String(currentWord);
 	}
 
-	/**
-     * getRandomIndex method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	private int getRandomIndex() {
-		int size = wordList.size();
-		return random.nextInt(size);
-	}
-	
-	/**
-     * initializeWordleGrid method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	private WordleResponse[][] initializeWordleGrid() {
-		WordleResponse[][] wordleGrid = new WordleResponse[maximumRows][columnCount];
 
-		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
-		for (int row = 0; row < wordleGrid.length; row++) {
-			// Loop over a known range/collection; watch indices and ensure side effects are intentional.
-			for (int column = 0; column < wordleGrid[row].length; column++) {
-				wordleGrid[row][column] = null;
-			}
-		}
-
-		return wordleGrid;
-	}
-	
-	/**
-     * setWordList method performs its core logic or handles UI actions as defined.
-     * @param wordList parameter description
-     */
-	@Override
-	public void setWordList(List<String> wordList) {
-		this.wordList = wordList;
-		wordsLoaded = true;
-	}
-	
-	/**
-     * setCurrentColumn method performs its core logic or handles UI actions as defined.
-     * @param c parameter description
-     */
-	@Override
-	public void setCurrentColumn(char c) {
-		currentColumn++;
-		currentColumn = Math.min(currentColumn, (columnCount - 1));
-		guess[currentColumn] = c;
-		// Construct a new object—initialize and configure it close to creation for readability.
-		wordleGrid[currentRow][currentColumn] = new WordleResponse(c,
-				Color.WHITE, Color.BLACK);
-	}
-	
-	/**
-     * backspace method performs its core logic or handles UI actions as defined.
-     */
-	@Override
-	public void backspace() {
-		if (currentColumn >= 0) {
-	        wordleGrid[currentRow][currentColumn] = null;
-	        guess[currentColumn] = ' ';
-	        currentColumn--;
-	    }
-	}
-	
-	/**
-     * getCurrentRow method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public WordleResponse[] getCurrentRow() {
-		return wordleGrid[getCurrentRowNumber()];
-	}
-	
-	/**
-     * getCurrentRowNumber method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public int getCurrentRowNumber() {
-		return currentRow - 1;
-	}
-	
 	/**
      * setCurrentRow method performs its core logic or handles UI actions as defined.
      * @return result of the operation
@@ -222,10 +89,7 @@ public class WordleModel implements Model {
 			} else if (contains(currentWord, guess, column)) {
 				backgroundColor = AppColors.YELLOW;
 			}
-			
-			// Construct a new object—initialize and configure it close to creation for readability.
-			wordleGrid[currentRow][column] = new WordleResponse(guess[column],
-					backgroundColor, foregroundColor);
+			grid[currentRow][column] = new WordleResponse(guess[column], backgroundColor, foregroundColor);
 		}
 		
 		currentColumn = -1;
@@ -255,90 +119,13 @@ public class WordleModel implements Model {
 		// this'll count how many of that letter have already been guessed correctly or marked yellow earlier
 		for (int i = 0; i < column; i++) {
 	        if (guess[i] == letter &&
-	           (wordleGrid[currentRow][i] != null &&
-	            (wordleGrid[currentRow][i].getBackgroundColor().equals(AppColors.GREEN) ||
-	             wordleGrid[currentRow][i].getBackgroundColor().equals(AppColors.YELLOW)))) {
+	           (grid[currentRow][i] != null &&
+	            (grid[currentRow][i].getBackgroundColor().equals(AppColors.GREEN) ||
+	             grid[currentRow][i].getBackgroundColor().equals(AppColors.YELLOW)))) {
 	            alreadyMatched++;
 	        }
 	    }
 
 	    return alreadyMatched < countInWord;
 	}
-
-	/**
-     * getWordleGrid method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public WordleResponse[][] getWordleGrid() {
-		return wordleGrid;
-	}
-	
-	/**
-     * getMaximumRows method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public int getMaximumRows() {
-		return maximumRows;
-	}
-
-	/**
-     * getColumnCount method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public int getColumnCount() {
-		return columnCount;
-	}
-
-	/**
-     * getCurrentColumn method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public int getCurrentColumn() {
-		return currentColumn;
-	}
-
-	/**
-     * getTotalWordCount method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public int getTotalWordCount() {
-		return wordList.size();
-	}
-
-	/**
-     * getStatistics method performs its core logic or handles UI actions as defined.
-     * @return result of the operation
-     */
-	@Override
-	public Statistics getStatistics() {
-		return statistics;
-	}
-	
-	
-	//Law of delimeter helpers
-	@Override
-	public void incrementTotalGamesPlayed() {
-	    statistics.incrementTotalGamesPlayed();
-	}
-
-	@Override
-	public void addWordsGuessed(int rowNumber) {
-	    statistics.addWordsGuessed(rowNumber);
-	}
-	@Override
-	public void incrementCurrentStreak() {
-	    int current = statistics.getCurrentStreak();
-	    statistics.setCurrentStreak(current + 1);
-	}
-
-	@Override
-	public void resetCurrentStreak() {
-	    statistics.setCurrentStreak(0);
-	}
-
 }
