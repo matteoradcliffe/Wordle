@@ -42,11 +42,11 @@ public abstract class AbstractModel implements Model{
 	
 	@Override
 	public void backspace() {
-		if (currentColumn >= 0);
+		if (currentColumn >= 0) {
 			grid[currentRow][currentColumn] = null;
 			guess[currentColumn] = ' ';
 			currentColumn--;
-			
+		}
 		
 	}
 	
@@ -59,6 +59,26 @@ public abstract class AbstractModel implements Model{
 	public int getCurrentRowNumber() {
 		return currentRow;
 	}
+	
+	@Override
+    public abstract void generateCurrentWord();
+    @Override
+    public abstract void setCurrentWord(String word);
+    @Override
+    public abstract String getCurrentWord();
+    @Override
+    public abstract boolean setCurrentRow();
+    @Override public WordleResponse[][] getWordleGrid() { return grid; }
+    @Override public int getMaximumRows() { return maximumRows; }
+    @Override public int getColumnCount() { return columnCount; }
+    @Override public void incrementTotalGamesPlayed() { statistics.incrementTotalGamesPlayed(); }
+    @Override public void addWordsGuessed(int rowNumber) { statistics.addWordsGuessed(rowNumber); }
+    @Override public void incrementCurrentStreak() { statistics.setCurrentStreak(statistics.getCurrentStreak() + 1); }
+    @Override public void resetCurrentStreak() { statistics.setCurrentStreak(0); }
+    @Override public int getCurrentColumn() { return currentColumn; }
+    @Override public int getTotalWordCount() { return wordList.size(); }
+    @Override public Statistics getStatistics() { return statistics; }
+    
 	
 	
 }
