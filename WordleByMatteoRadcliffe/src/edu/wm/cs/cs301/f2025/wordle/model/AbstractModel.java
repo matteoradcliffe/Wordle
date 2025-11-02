@@ -1,6 +1,7 @@
 package edu.wm.cs.cs301.f2025.wordle.model;
 
 import java.util.*;
+import java.awt.Color;
 
 public abstract class AbstractModel implements Model{
 
@@ -29,4 +30,23 @@ public abstract class AbstractModel implements Model{
 		wordList = list;
 	}
 	
+	
+	@Override
+	public void setCurrentColumn(char c) {
+		currentColumn++;
+		currentColumn = Math.min(currentColumn, columnCount-1);
+		char up = Character.toUpperCase(c);
+		guess[currentColumn] = up;
+		grid[currentRow][currentColumn] = new WordleResponse(up, Color.WHITE, Color.BLACK);
+	}
+	
+	@Override
+	public void backspace() {
+		if (currentColumn >= 0);
+			grid[currentRow][currentColumn] = null;
+			guess[currentColumn] = ' ';
+			currentColumn--;
+			
+		
+	}
 }
