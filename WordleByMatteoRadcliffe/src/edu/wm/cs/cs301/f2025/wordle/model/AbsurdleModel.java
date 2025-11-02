@@ -21,7 +21,7 @@ public class AbsurdleModel implements Model {
 
     @Override
     public void initialize() {
-
+    		
         // 1. reset all game state variables
         // 2. current possible dict
         // 3. reset row/colum counters
@@ -32,20 +32,26 @@ public class AbsurdleModel implements Model {
     public void generateCurrentWord() {
         // Absurdle never commits to one word.
         // Keep current possible as all valid candidates initially.
+    		currentPossible = new ArrayList<>(fullDictionary);
     }
 
     @Override
     public void setCurrentWord(String word) {
-        // Used only for testing  may set current possible = [word].
+        // Used only for testing may set current possible = [word].
+    		currentPossible = new ArrayList<>();
+    		currentPossible.add(word);
     }
 
     @Override
     public String getCurrentWord() {
-    	
-    	
+    		if (currentPossible.size() == 1) 
+    			return currentPossible.get(0);
+    		else 
+    			return null;
+    		
+    
         // If only one possible word remains, return it.
         // if not/Otherwise, return placeholder or null.
-        return null;
     }
 
     @Override
@@ -74,8 +80,8 @@ public class AbsurdleModel implements Model {
     public void backspace() {
         // If currentColumn >= 0, clear last char and move back.
         if (currentColumn >= 0) {
-            guess[currentColumn] = '\0';
             grid[currentRow][currentColumn] = null;
+            guess[currentColumn] = '\0';
             currentColumn--;
         }
     }
@@ -84,7 +90,7 @@ public class AbsurdleModel implements Model {
     public WordleResponse[] getCurrentRow() {
     	
         // return the current rows responses
-        return grid[Math.max(0, currentRow)];
+        return grid[currentRow];
     }
 
     @Override
@@ -97,6 +103,10 @@ public class AbsurdleModel implements Model {
     
     @Override
     public boolean setCurrentRow() {
+    		String guessedWord = new String(guess).toUpperCase();
+    		
+    		
+    		
         // 1. current possible by feedback pattern for this guess
         // 2. choose the largest 
         // 3. Update grid with that pattern
