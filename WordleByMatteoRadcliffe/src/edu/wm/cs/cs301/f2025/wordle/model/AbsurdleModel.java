@@ -3,167 +3,104 @@ package edu.wm.cs.cs301.f2025.wordle.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
+import java.util.Map;
+import java.util.HashMap;
 
 
-public class AbsurdleModel implements Model {
-
-    private List<String> fullDictionary = new ArrayList<>();
+public class AbsurdleModel extends AbstractModel{
     private List<String> currentPossible = new ArrayList<>();
-    private int currentRow = 0;
-    private int currentColumn = -1;
-    private final int columnCount = 5;
-    private final int maximumRows = 6;
-    private char[] guess = new char[columnCount];
-    private WordleResponse[][] grid = new WordleResponse[maximumRows][columnCount];
-    private Statistics stats = new Statistics();
     
     
-
-    @Override
-    public void initialize() {
-    		
-        // 1. reset all game state variables
-        // 2. current possible dict
-        // 3. reset row/colum counters
-    }
-    
-
     @Override
     public void generateCurrentWord() {
         // Absurdle never commits to one word.
         // Keep current possible as all valid candidates initially.
-    		currentPossible = new ArrayList<>(fullDictionary);
+    		currentPossible = new ArrayList<>(wordList);
     }
 
     @Override
     public void setCurrentWord(String word) {
         // Used only for testing may set current possible = [word].
     		currentPossible = new ArrayList<>();
-    		currentPossible.add(word);
+    		currentPossible.add(word.toUpperCase());
     }
 
     @Override
     public String getCurrentWord() {
-    		if (currentPossible.size() == 1) 
-    			return currentPossible.get(0);
-    		else 
-    			return null;
-    		
-    
+    		return currentPossible.size() == 1 ? currentPossible.get(0) : null;
         // If only one possible word remains, return it.
         // if not/Otherwise, return placeholder or null.
     }
 
     @Override
-    public void setWordList(List<String> wordList) {
-        // full dict and filtered wordList
-        // current possible anf full dict copy
-    	
-        this.fullDictionary = wordList;
-        this.currentPossible = new ArrayList<>(wordList);
-    }
-
-    @Override
-    public void setCurrentColumn(char c) {
-        // 1. Increment currentColumn
-        // 2. store character in guess array
-        // 3. Fill grid[currentRow][currentColumn]
-    	
-        currentColumn++;
-        currentColumn = Math.min(currentColumn, columnCount - 1);
-        guess[currentColumn] = c;
-        grid[currentRow][currentColumn] = new WordleResponse(Character.toUpperCase(c), Color.WHITE, Color.BLACK);
-    }
-
-    
-    @Override
-    public void backspace() {
-        // If currentColumn >= 0, clear last char and move back.
-        if (currentColumn >= 0) {
-            grid[currentRow][currentColumn] = null;
-            guess[currentColumn] = '\0';
-            currentColumn--;
-        }
-    }
-
-    @Override
-    public WordleResponse[] getCurrentRow() {
-    	
-        // return the current rows responses
-        return grid[currentRow];
-    }
-
-    @Override
-    public int getCurrentRowNumber() {
-        // return currentRow index
-        return currentRow;
-    }
-
-    
-    
-    @Override
     public boolean setCurrentRow() {
     		String guessedWord = new String(guess).toUpperCase();
     		
+    		Map<String, List<String>> buckets = new HashMap<>();
+    		for (String c : currentPossible) {
+    			String pattern = doPattern(guessedWord, c);
+    			buckets.computeIfAbsent(pattern, h -> new ArrayList<>()).add(c);
+    		}
     		
+    		int maxSize = 0;
+    		String chosen = null;
+    		for (var entry : buckets.entrySet()) {
+    			int size = entry.getValue().size();
+    			if (size > maxSize) {
+    				maxSize = size;
+    				chosen = entry.getKey();
+    			}
+    		}
+    			
+    		currentPossible = buckets.get(chosen);
+
+    	        
+    		for (int i = 0; i < columnCount; i++) {
+    			char g = guessedWord.charAt(i);
+    	         Color bg = AppColors.GRAY;
+    	         if (chosen.charAt(i) == 'G') bg = AppColors.GREEN;
+    	         else if (chosen.charAt(i) == 'Y') bg = AppColors.YELLOW;
+    	         grid[currentRow][i] = new WordleResponse(g, bg, Color.WHITE);
+    	            
+    	    }
+    	    currentRow++;
+    	    currentColumn = -1;
+    	    guess = new char[columnCount];
+    	    return currentRow < maximumRows;
+   
+    	}
     		
         // 1. current possible by feedback pattern for this guess
         // 2. choose the largest 
         // 3. Update grid with that pattern
         // 4. Update currentPossible
         // 5. Increment currentRow, reset currentColumn
-        return false;
-    }
-
-    @Override
-    public WordleResponse[][] getWordleGrid() {
-        //return game grid
-        return grid;
-    }
-
-    @Override
-    public int getMaximumRows() {
-        return maximumRows;
-    }
-
-    @Override
-    public int getColumnCount() {
-        return columnCount;
-    }
-
-    @Override
-    public int getCurrentColumn() {
-        return currentColumn;
-    }
-
-    @Override
-    public int getTotalWordCount() {
-        return fullDictionary.size();
-    }
-
-    @Override
-    public Statistics getStatistics() {
-        return stats;
-    }
-
-    @Override
-    public void incrementTotalGamesPlayed() {
-        //stats.incrementTotalGamesPlayed();
-    }
+        
     
+    private String doPattern(String guess, String target) {
+    		char[] pattern = new char[columnCount];
+    		boolean[] used = new boolean[columnCount];
 
-    @Override
-    public void addWordsGuessed(int rowNumber) {
-        //stats.addWordsGuessed(rowNumber);
-    }
-
-    @Override
-    public void incrementCurrentStreak() {
-        // stats.incrementCurrentStreak();
-    }
-
-    @Override
-    public void resetCurrentStreak() {
-        // stats.resetCurrentStreak();
-    }
+    		for (int i = 0; i < columnCount; i++) {
+    			if (guess.charAt(i) == target.charAt(i)) {
+    					pattern[i] = 'G'; 
+    					used[i] = true;
+    			}
+    		}
+    		for (int i = 0; i < columnCount; i++) {
+    			if (pattern[i] == 'G') continue;
+    			char g = guess.charAt(i);
+    			boolean found = false;
+    			for (int j = 0; j < columnCount; j++) {
+    				if (!used[j] && target.charAt(j) == g) { 
+    					used[j] = true; 
+    					found = true; 
+    					break; 
+    				}
+    			}
+    			pattern[i] = found ? 'Y' : 'B';
+    		}
+    		return new String(pattern);
+    	}
 }
+
