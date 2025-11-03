@@ -35,7 +35,8 @@ public class WordleModelTestManual {
 	public void testTypingAndSubmittingGuess() {
 		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("BASES"));
-		model.generateCurrentWord();
+		model.initialize();
+		model.setCurrentWord("BASES");
 		
 		for (char c : "BASES".toCharArray()) {
 			model.setCurrentColumn(c);
@@ -43,8 +44,12 @@ public class WordleModelTestManual {
 		boolean result = model.setCurrentRow();
 		
 		assertTrue(result, "should return true becasue row remains available.");
-		WordleResponse[] responses = model.getCurrentRow();
+		int filledRow = model.getCurrentRowNumber() - 1 >= 0 ? model.getCurrentRowNumber() - 1 : 0;
+	    WordleResponse[] responses = model.getWordleGrid()[filledRow];
+	
+	    assertNotNull(responses, "Row should not be null.");
 		assertEquals(5, responses.length, "Each row should contain 5 responses.");
+		assertNotNull(responses[4], "Last cell should not be null.");
 		assertEquals("S", responses[4].getChar(), "Last cloumn should store the last guessed letter.");
 	}
 	
@@ -52,15 +57,16 @@ public class WordleModelTestManual {
 	public void testGreenForCorrectGuess() {
 		Model model = new WordleModel();
 		model.setWordList(Arrays.asList("BASES"));
-		model.generateCurrentWord();
-		
-		String word = model.getCurrentWord();
-		for (char c : word.toCharArray()) {
+		model.initialize();
+	    model.setCurrentWord("BASES");
+	
+		for (char c : "BASES".toCharArray()) {
 			model.setCurrentColumn(c);
 		}
 		model.setCurrentRow();
 		WordleResponse[] row = model.getCurrentRow();
 		for (WordleResponse response : row) {
+			assertNotNull(response, "Response should not be null");
 			assertEquals(AppColors.GREEN, response.getBackgroundColor(),
 					"each letter should be green for correct word.");
 		}
@@ -79,7 +85,7 @@ public class WordleModelTestManual {
 		model.setCurrentRow();
 		WordleResponse[] row = model.getCurrentRow();
 		
-		boolean hasYellow = Arrays.stream(row).anyMatch(r -> AppColors.YELLOW.equals(r.getBackgroundColor()));
+		boolean hasYellow = Arrays.stream(row).anyMatch(r -> r != null && AppColors.YELLOW.equals(r.getBackgroundColor()));
 		assertTrue(hasYellow,  "Partial guesses should be yellow");
 	}
 	

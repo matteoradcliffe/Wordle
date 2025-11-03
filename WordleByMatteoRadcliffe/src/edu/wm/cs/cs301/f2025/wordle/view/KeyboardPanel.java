@@ -23,6 +23,8 @@ import edu.wm.cs.cs301.f2025.wordle.model.Model;
  * It is responsible for handling its respective UI or logic functionality within the game.
  */
 public class KeyboardPanel {
+	
+	private JLabel totalLabel;
 
 	private int buttonIndex, buttonCount;
 
@@ -215,14 +217,11 @@ public class KeyboardPanel {
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		Font footerFont = AppFonts.getFooterFont();
 
-		String text = String.format("%,d", model.getTotalWordCount());
-		text += " possible " + model.getColumnCount() + "-letter words!";
+		String text = String.format("%,d", model.getTotalWordCount()) +" possible " + model.getColumnCount() + "-letter words!";
 		// Construct a new object—initialize and configure it close to creation for readability.
-		JLabel label = new JLabel(text);
-		// Configure a property—group related setters so defaults are easy to audit.
-		label.setFont(footerFont);
-		// Compose structure/UI: adding here establishes parent-child ownership and lifecycle.
-		panel.add(label);
+		totalLabel = new JLabel(text);
+	    totalLabel.setFont(footerFont);
+	    panel.add(totalLabel);
 
 		return panel;
 	}
@@ -282,6 +281,18 @@ public class KeyboardPanel {
      */
 	public JPanel getPanel() {
 		return panel;
+	}
+	
+	public void updateTotalLabel() {
+	    String text = String.format("%,d", model.getTotalWordCount());
+	    if (model.getClass().getSimpleName().equals("AbsurdleModel")) {
+	        text += " possible " + model.getColumnCount() + "-letter words Left!";
+	    } else {
+	        text += " possible " + model.getColumnCount() + "-Letter words!";
+	    }
+	    totalLabel.setText(text);
+	    totalLabel.repaint();
+	    
 	}
 
 }

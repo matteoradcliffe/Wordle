@@ -49,16 +49,26 @@ public class AbsurdleModelTestManual {
 
     @Test
     public void testPartitionSelectionConceptually() {
+        model.setWordList(Arrays.asList("HELLO", "WORLD", "HOUSE", "APPLE"));
+        model.initialize();
         
-    	
-        for (char c : "HELLO".toCharArray()) model.setCurrentColumn(c);
+        for (char c : "HELLO".toCharArray()) {
+            model.setCurrentColumn(c);
+        }
         boolean rowAccepted = model.setCurrentRow();
-        assertTrue(rowAccepted, "row submission should stil return true.");
-        WordleResponse[] row = model.getCurrentRow();
+        
+        assertTrue(rowAccepted, "Row submission should still return true.");
+        int filledRow = model.getCurrentRowNumber() - 1 >= 0 ? model.getCurrentRowNumber() - 1 : 0;
+        WordleResponse[] row = model.getWordleGrid()[filledRow];
 
-    
-        long greens = Arrays.stream(row).filter(r -> AppColors.GREEN.equals(r.getBackgroundColor())).count();
-        assertEquals(0, greens, " pattern should minimize greens at start (conceptually).");
+        assertNotNull(row, "Row should not be null.");
+
+        long greens = Arrays.stream(row)
+                .filter(Objects::nonNull)
+                .filter(r -> AppColors.GREEN.equals(r.getBackgroundColor()))
+                .count();
+        assertEquals(0, greens, "Pattern should minimize greens at start (conceptually).");
+   
     }
 
     @Test

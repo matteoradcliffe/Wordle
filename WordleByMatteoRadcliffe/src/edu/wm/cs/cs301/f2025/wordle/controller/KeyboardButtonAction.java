@@ -10,6 +10,7 @@ import edu.wm.cs.cs301.f2025.wordle.model.Model;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleResponse;
 import edu.wm.cs.cs301.f2025.wordle.view.StatisticsDialog;
 import edu.wm.cs.cs301.f2025.wordle.view.WordleFrame;
+import edu.wm.cs.cs301.f2025.wordle.view.KeyboardPanel;
 
 /**
  * The KeyboardButtonAction class represents the KeyboardButtonAction component of the Wordle application.
@@ -21,6 +22,7 @@ public class KeyboardButtonAction extends AbstractAction {
 	private final WordleFrame view;
 	
 	private final Model model;
+	
 
 	public KeyboardButtonAction(WordleFrame view, Model model) {
 		this.view = view;
@@ -62,8 +64,9 @@ public class KeyboardButtonAction extends AbstractAction {
 	        handleLoss();
 	    } else {
 	        view.repaintWordleGridPanel();
-	        
+	        view.getKeyboardPanel().updateTotalLabel();
 	    }
+	    
 	    
 	}
 

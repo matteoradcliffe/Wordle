@@ -18,11 +18,16 @@ public class Wordle implements Runnable {
 	public static void main(String[] args) {
 	
 		// determine mode
-        String mode = (args != null && args.length > 0)? args[0].trim().toLowerCase(): "random";
+        String strat = "random";
+        for (int i = 0; i < args.length -1; i++) {
+        		if("-s".equals(args[i])) {
+        			strat = args[i+1].trim().toLowerCase();
+        		}
+        }
 
         // chose model
         Model selectedModel;
-        switch (mode) {
+        switch (strat) {
             case "absurdle":
                 selectedModel = new AbsurdleModel();
                 System.out.println("Launching Absurdle mode...");

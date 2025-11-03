@@ -5,11 +5,12 @@ import java.util.List;
 import java.awt.Color;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 
 public class AbsurdleModel extends AbstractModel{
     private List<String> currentPossible = new ArrayList<>();
-    
+    private static final Logger LOG = Logger.getLogger(AbsurdleModel.class.getName());
     
     @Override
     public void generateCurrentWord() {
@@ -50,7 +51,13 @@ public class AbsurdleModel extends AbstractModel{
     				maxSize = size;
     				chosen = entry.getKey();
     			}
+    		
     		}
+    		
+    		if (chosen == null) {
+    		    chosen = "BBBBB";
+    		}
+
     			
     		currentPossible = buckets.get(chosen);
 
@@ -66,6 +73,8 @@ public class AbsurdleModel extends AbstractModel{
     	    currentRow++;
     	    currentColumn = -1;
     	    guess = new char[columnCount];
+    	    LOG.info(String.format("Guess: %-10s | Pattern: %-5s | Remaining: %d words",guessedWord,(chosen == null ? "N/A" : chosen),currentPossible.size()));
+
     	    return currentRow < maximumRows;
    
     	}

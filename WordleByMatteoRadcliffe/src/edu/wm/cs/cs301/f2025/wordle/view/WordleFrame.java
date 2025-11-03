@@ -187,6 +187,10 @@ public class WordleFrame {
 		return frame;
 	}
 	
+	public KeyboardPanel getKeyboardPanel() {
+	    return keyboardPanel;
+	}
+	
 	private class CancelAction extends AbstractAction {
 
 		private static final long serialVersionUID = 1L;

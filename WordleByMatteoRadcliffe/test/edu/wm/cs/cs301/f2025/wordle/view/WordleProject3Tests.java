@@ -85,8 +85,10 @@ public class WordleProject3Tests {
 	    }
 	    assertDoesNotThrow(() -> model.setCurrentRow());
 
-	    WordleResponse[] row = model.getCurrentRow();
+	    int filledRow = model.getCurrentRowNumber() - 1 >= 0 ? model.getCurrentRowNumber() - 1 : 0;
+	    WordleResponse[] row = model.getWordleGrid()[filledRow];
 	    for (WordleResponse tile : row) {
+	    		assertNotNull(tile, "Tile should not be null");
 	        assertNotNull(tile.getBackgroundColor(),"each tile should have a visible backgrond color");
 	    }
 	}

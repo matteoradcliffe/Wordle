@@ -80,16 +80,24 @@ public class WordleModelTestGenerated {
      */
     @Test
     public void testAllGreenForCorrectGuess() {
-        String secret = model.getCurrentWord();
-        for (char c : secret.toCharArray()) {
-            model.setCurrentColumn(c);
-        }
-        model.setCurrentRow();
-        WordleResponse[] responses = model.getCurrentRow();
-        for (WordleResponse cell : responses) {
-            assertEquals(AppColors.GREEN, cell.getBackgroundColor(),
-                    "Correct word should yield all green cells.");
-        }
+    	
+    		model.setWordList(Arrays.asList("APPLE"));
+    	    model.initialize();
+    	    model.setCurrentWord("APPLE");
+    	    
+    	    for (char c : "APPLE".toCharArray()) {
+    	        model.setCurrentColumn(c);
+    	    }
+    	    model.setCurrentRow();
+    	    
+    	    int filledRow = model.getCurrentRowNumber() - 1 >= 0 ? model.getCurrentRowNumber() - 1 : 0;
+    	    WordleResponse[] responses = model.getWordleGrid()[filledRow];
+    	    
+    	    for (WordleResponse cell : responses) {
+    	        assertNotNull(cell, "Cell should not be null");
+    	        assertEquals(AppColors.GREEN, cell.getBackgroundColor(),
+    	                "Correct word should yield all green cells.");
+    	    }
     }
 
     /**
@@ -97,16 +105,22 @@ public class WordleModelTestGenerated {
      */
     @Test
     public void testGrayForIncorrectLetters() {
-        model.setWordList(Arrays.asList("APPLE", "ZZZZZ"));
-        model.generateCurrentWord();
+    	model.setWordList(Arrays.asList("APPLE", "ZZZZZ"));
+        model.initialize();
+        model.setCurrentWord("APPLE");
+
         for (char c : "ZZZZZ".toCharArray()) {
             model.setCurrentColumn(c);
         }
         model.setCurrentRow();
-        WordleResponse[] row = model.getCurrentRow();
+
+        int filledRow = model.getCurrentRowNumber() - 1 >= 0 ? model.getCurrentRowNumber() - 1 : 0;
+        WordleResponse[] row = model.getWordleGrid()[filledRow];
 
         boolean allGray = Arrays.stream(row)
+                .filter(Objects::nonNull)
                 .allMatch(r -> AppColors.GRAY.equals(r.getBackgroundColor()));
+
         assertTrue(allGray, "All letters not in word should be gray.");
     }
 
@@ -115,15 +129,22 @@ public class WordleModelTestGenerated {
      */
     @Test
     public void testYellowFeedbackForMisplacedLetters() {
-        model.setWordList(Arrays.asList("APPLE", "PAPLE"));
-        model.generateCurrentWord();
+    	model.setWordList(Arrays.asList("APPLE", "PAPLE"));
+        model.initialize();
+        model.setCurrentWord("APPLE");
+
         for (char c : "PAPLE".toCharArray()) {
             model.setCurrentColumn(c);
         }
         model.setCurrentRow();
-        WordleResponse[] row = model.getCurrentRow();
+
+        int filledRow = model.getCurrentRowNumber() - 1 >= 0 ? model.getCurrentRowNumber() - 1 : 0;
+        WordleResponse[] row = model.getWordleGrid()[filledRow];
+
         boolean hasYellow = Arrays.stream(row)
+                .filter(Objects::nonNull)
                 .anyMatch(r -> AppColors.YELLOW.equals(r.getBackgroundColor()));
+
         assertTrue(hasYellow, "Misplaced correct letters should be yellow.");
     }
 
