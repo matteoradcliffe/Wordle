@@ -63,22 +63,28 @@ public class WordleModel extends AbstractModel {
      * @return result of the operation
      */
 	@Override
-	public boolean setCurrentRow() {		
+	public boolean setCurrentRow() {	
+		
+		if (!enforceRulesBeforeSubmit()) {
+	        return true;
+		}
+	        
 		String guessWord = new String(guess).toUpperCase();
 		
-		if (wordList == null || currentWord == null) {
-			throw new IllegalStateException("word list or current word not initilize");
-			
-		}
-		if (guessWord.length() != columnCount) {
-	        throw new IllegalArgumentException("Incomplete guess: " + guessWord);
-	    }
+		if (rule == null) {
+	        if (wordList == null || currentWord == null) {
+	            throw new IllegalStateException("word list or current word not initilize");
+	        }
+	        
+	        if (guessWord.length() != columnCount) {
+	        		throw new IllegalArgumentException("Incomplete guess: " + guessWord);
+	        }
 
-		boolean inList = wordList.stream().anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
-		if (!inList) {
-		    throw new IllegalArgumentException("Guess not in word list: " + guessWord);
+	        boolean inList = wordList.stream().anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
+	        if (!inList) {
+	        		throw new IllegalArgumentException("Guess not in word list: " + guessWord);
+	        }
 		}
-		
 		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
 		for (int column = 0; column < guess.length; column++) {
 			Color backgroundColor = AppColors.GRAY;

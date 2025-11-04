@@ -6,6 +6,7 @@ import edu.wm.cs.cs301.f2025.wordle.model.Model;
 import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 import edu.wm.cs.cs301.f2025.wordle.model.AbsurdleModel;
 import edu.wm.cs.cs301.f2025.wordle.view.WordleFrame;
+import edu.wm.cs.cs301.f2025.wordle.model.AbstractModel;
 /**
  * The Wordle class represents the Wordle component of the Wordle application.
  * It is responsible for handling its respective UI or logic functionality within the game.
@@ -19,10 +20,23 @@ public class Wordle implements Runnable {
 	
 		// determine mode
         String strat = "random";
-        for (int i = 0; i < args.length -1; i++) {
-        		if("-s".equals(args[i])) {
-        			strat = args[i+1].trim().toLowerCase();
-        		}
+        boolean hard = false;
+        boolean wordsOnly = false;
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-s":
+                    if (i + 1 < args.length) {
+                        strat = args[++i].trim().toLowerCase();
+                    }
+                    break;
+                case "-h":
+                    hard = true;
+                    break;
+                case "-wo":
+                    wordsOnly = true;
+                    break;
+                default:
+            }
         }
 
         // chose model
@@ -38,6 +52,21 @@ public class Wordle implements Runnable {
                 System.out.println("Launching standard Wordle mode...");
                 break;
         }
+        edu.wm.cs.cs301.f2025.wordle.model.rules.AcceptanceRule chain = new edu.wm.cs.cs301.f2025.wordle.model.rules.RuleBasic();
+        
+        if (wordsOnly) {
+            chain = new edu.wm.cs.cs301.f2025.wordle.model.rules.RuleLegitimateWordsOnly(chain);
+        }
+        if (hard) {
+            chain = new edu.wm.cs.cs301.f2025.wordle.model.rules.RuleHard(chain);
+        }
+        
+        if (selectedModel instanceof AbstractModel) {
+            ((AbstractModel) selectedModel).setAcceptanceRule(chain);
+        }
+        selectedModel.setWordList(java.util.Arrays.asList("APPLE", "GRAPE", "LEMON", "BERRY", "MANGO"));
+        selectedModel.initialize();
+        
  
         SwingUtilities.invokeLater(new Wordle(selectedModel));
 	}

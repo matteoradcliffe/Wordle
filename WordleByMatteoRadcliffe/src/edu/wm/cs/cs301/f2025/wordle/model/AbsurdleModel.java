@@ -35,6 +35,10 @@ public class AbsurdleModel extends AbstractModel{
 
     @Override
     public boolean setCurrentRow() {
+    	
+    		if (!enforceRulesBeforeSubmit()) {
+    			return true;
+    		}
     		String guessedWord = new String(guess).toUpperCase();
     		
     		Map<String, List<String>> buckets = new HashMap<>();

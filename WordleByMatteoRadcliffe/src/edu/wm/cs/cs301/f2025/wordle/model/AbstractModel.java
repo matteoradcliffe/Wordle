@@ -1,9 +1,12 @@
 package edu.wm.cs.cs301.f2025.wordle.model;
+import edu.wm.cs.cs301.f2025.wordle.model.rules.AcceptanceRule;
 
 import java.util.*;
 import java.awt.Color;
 
 public abstract class AbstractModel implements Model{
+	
+	protected AcceptanceRule rule;
 
 	protected final int columnCount = 5;
 	protected final int maximumRows = 6;
@@ -15,6 +18,35 @@ public abstract class AbstractModel implements Model{
 	
 	protected List<String> wordList = new ArrayList<>();
 	protected final Statistics statistics = new Statistics();
+	
+	@Override
+	public char[] getGuess() {
+	    // return a copy so rules can't mutate internal state
+	    return java.util.Arrays.copyOf(guess, guess.length);
+	}
+	
+	@Override
+	public java.util.List<String> getWordList() {
+	    return wordList;
+	}
+	
+	protected void clearCurrentRowInput() {
+	    if (currentColumn < 0) return;
+	    for (int c = 0; c <= currentColumn; c++) {
+	        grid[currentRow][c] = null;
+	        guess[c] = ' ';
+	    }
+	    currentColumn = -1;
+	}
+	
+	protected boolean enforceRulesBeforeSubmit() {
+	    if (rule == null) return true;
+	    boolean ok = rule.isAcceptableGuess(this);
+	    if (!ok) {
+	        clearCurrentRowInput();   // reject & allow retyping in same row
+	    }
+	    return ok;
+	}
 	
 	@Override
 	public void initialize() {
@@ -59,6 +91,14 @@ public abstract class AbstractModel implements Model{
 	public int getCurrentRowNumber() {
 		return currentRow;
 	}
+	
+	public void setAcceptanceRule(AcceptanceRule rule) {
+        this.rule = rule;
+    }
+	
+	public AcceptanceRule getAcceptanceRule() {
+        return rule;
+    }
 	
 	@Override
     public abstract void generateCurrentWord();

@@ -3,6 +3,9 @@ package edu.wm.cs.cs301.f2025.wordle.model;
 import java.util.List;
 
 public interface Model {
+	
+	char[] getGuess();
+	java.util.List<String> getWordList();
 
 	/**
 	 * initialize method performs its core logic or handles UI actions as defined.

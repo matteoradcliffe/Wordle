@@ -51,11 +51,14 @@ public class KeyboardButtonAction extends AbstractAction {
 	}
 
 	private void processEnter() {
-	    if (model.getCurrentColumn() < model.getColumnCount() - 1) return;
+	    if (model.getCurrentColumn() < model.getColumnCount() - 1) { 
+	    		return;
+	}
 
 	    
 	    boolean moreRows = model.setCurrentRow();
 	    WordleResponse[] row = model.getCurrentRow();
+	    if (row == null) return;
 	    int greens = updateKeyboardColors(row);
 
 	    if (greens == model.getColumnCount()) {
@@ -73,9 +76,12 @@ public class KeyboardButtonAction extends AbstractAction {
 	
 	private int updateKeyboardColors(WordleResponse[] row) {
 	    int greens = 0;
+	    if (row == null) return greens;
+	    
 	    for (WordleResponse r : row) {
+	    		if (r == null) continue;
 	        view.setColor(String.valueOf(r.getChar()), r.getBackgroundColor(), r.getForegroundColor());
-	        if (r.getBackgroundColor().equals(AppColors.GREEN)) greens++;
+	        if (AppColors.GREEN.equals(r.getBackgroundColor())) greens++;
 	    }
 	    return greens;
 	}

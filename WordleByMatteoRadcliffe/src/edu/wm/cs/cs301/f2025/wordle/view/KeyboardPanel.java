@@ -195,11 +195,12 @@ public class KeyboardPanel {
 		// Decision point: branch based on this condition—explain why it matters for state flow.
 		if (text.equalsIgnoreCase("Backspace")) {
 			// Insert/update in a map; consider overwrite behavior for existing keys.
-			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0),
-					"action");
-		} else {
+			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0),"action");
+		} else if (text.equalsIgnoreCase("Enter")) {
 			// Insert/update in a map; consider overwrite behavior for existing keys.
-			inputMap.put(KeyStroke.getKeyStroke(text.toUpperCase()), "action");
+			inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "action");
+		} else {
+	        inputMap.put(KeyStroke.getKeyStroke(text.toUpperCase()), "action");
 		}
 		ActionMap actionMap = button.getActionMap();
 		// Insert/update in a map; consider overwrite behavior for existing keys.
