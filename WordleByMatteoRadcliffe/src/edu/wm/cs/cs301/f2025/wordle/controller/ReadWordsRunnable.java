@@ -66,16 +66,10 @@ public class ReadWordsRunnable implements Runnable {
      */
 	private InputStream deliverInputStream() {
 		String text = "/resources/usa.txt";
-		// Original code
-		/*
-		ClassLoader loader = this.getClass().getClassLoader();
-		InputStream stream = loader.getResourceAsStream(text);
-		*/
-		// https://stackoverflow.com/questions/68314700/why-java-cannot-read-same-resource-file-when-module-info-is-added
 		
 		InputStream stream = Wordle.class.getResourceAsStream(text);
 		
-		// Decision point: branch based on this condition—explain why it matters for state flow.
+		
 		if (null == stream) {
 			System.out.println("Failed to open stream with " + text);
 			System.exit(0);
