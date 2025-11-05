@@ -11,6 +11,7 @@ public class RuleBasic implements AcceptanceRule {
             if (c == '\0' || c == ' ') {
                 return false; 
             }
+            
         }
         return true;
     }

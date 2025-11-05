@@ -80,8 +80,7 @@ public class WordleModel extends AbstractModel {
 	        throw new IllegalArgumentException("Incomplete guess: " + guessWord);
 	    }
 
-	    boolean inList = wordList.stream()
-	            .anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
+	    boolean inList = wordList.stream().anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
 	    if (!inList) {
 	        throw new IllegalArgumentException("Guess not in word list: " + guessWord);
 	    }
@@ -106,7 +105,7 @@ public class WordleModel extends AbstractModel {
 
 	    
 	    if (allCorrect) {
-	        System.out.println(" Word guessed correctly: " + guessWord);
+	        System.out.println(" word gussed correctly: " + guessWord);
 	        
 	        return false;
 	    }

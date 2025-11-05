@@ -22,6 +22,8 @@ public class RuleHard implements AcceptanceRule {
             return false;
         }
         
+        
+        
         WordleResponse[][] grid = model.getWordleGrid();
         int rowsDone = model.getCurrentRowNumber();
 

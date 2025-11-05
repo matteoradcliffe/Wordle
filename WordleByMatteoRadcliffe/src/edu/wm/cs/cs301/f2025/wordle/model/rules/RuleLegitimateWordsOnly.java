@@ -17,6 +17,7 @@ public class RuleLegitimateWordsOnly implements AcceptanceRule {
             return false;
         }
 
+        
         String guessWord = new String(model.getGuess()).toUpperCase();
         return model.getWordList().contains(guessWord);
     }
