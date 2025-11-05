@@ -18,8 +18,7 @@ import edu.wm.cs.cs301.f2025.wordle.model.Model;
  */
 public class ReadWordsRunnable implements Runnable {
 
-	private final static Logger LOGGER =
-			Logger.getLogger(ReadWordsRunnable.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(ReadWordsRunnable.class.getName());
 
 	private final Model model;
 

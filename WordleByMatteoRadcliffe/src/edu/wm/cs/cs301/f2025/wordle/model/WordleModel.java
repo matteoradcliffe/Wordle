@@ -63,46 +63,61 @@ public class WordleModel extends AbstractModel {
      * @return result of the operation
      */
 	@Override
-	public boolean setCurrentRow() {	
-		
-		if (!enforceRulesBeforeSubmit()) {
+	public boolean setCurrentRow() {
+	    
+	    if (!enforceRulesBeforeSubmit()) {
 	        return true;
-		}
-	        
-		String guessWord = new String(guess).toUpperCase();
-		
-		if (rule == null) {
-	        if (wordList == null || currentWord == null) {
-	            throw new IllegalStateException("word list or current word not initilize");
-	        }
-	        
-	        if (guessWord.length() != columnCount) {
-	        		throw new IllegalArgumentException("Incomplete guess: " + guessWord);
+	    }
+
+	    String guessWord = new String(guess).toUpperCase();
+
+	   
+	    if (wordList == null || currentWord == null) {
+	        throw new IllegalStateException("Word list or current word not initialized");
+	    }
+
+	    if (guessWord.length() != columnCount) {
+	        throw new IllegalArgumentException("Incomplete guess: " + guessWord);
+	    }
+
+	    boolean inList = wordList.stream()
+	            .anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
+	    if (!inList) {
+	        throw new IllegalArgumentException("Guess not in word list: " + guessWord);
+	    }
+
+	    
+	    boolean allCorrect = true;
+	    for (int column = 0; column < guess.length; column++) {
+	        Color backgroundColor = AppColors.GRAY;
+	        Color foregroundColor = Color.WHITE;
+
+	        if (guess[column] == currentWord[column]) {
+	            backgroundColor = AppColors.GREEN;
+	        } else if (contains(currentWord, guess, column)) {
+	            backgroundColor = AppColors.YELLOW;
+	            allCorrect = false;
+	        } else {
+	            allCorrect = false;
 	        }
 
-	        boolean inList = wordList.stream().anyMatch(w -> w != null && w.equalsIgnoreCase(guessWord));
-	        if (!inList) {
-	        		throw new IllegalArgumentException("Guess not in word list: " + guessWord);
-	        }
-		}
-		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
-		for (int column = 0; column < guess.length; column++) {
-			Color backgroundColor = AppColors.GRAY;
-			Color foregroundColor = Color.WHITE;
-			// Decision point: branch based on this condition—explain why it matters for state flow.
-			if (guess[column] == currentWord[column]) {
-				backgroundColor = AppColors.GREEN;
-			} else if (contains(currentWord, guess, column)) {
-				backgroundColor = AppColors.YELLOW;
-			}
-			grid[currentRow][column] = new WordleResponse(guess[column], backgroundColor, foregroundColor);
-		}
-		
-		currentColumn = -1;
-		currentRow++;
-		guess = new char[columnCount];
-		
-		return currentRow < maximumRows;
+	        grid[currentRow][column] = new WordleResponse(guess[column], backgroundColor, foregroundColor);
+	    }
+
+	    
+	    if (allCorrect) {
+	        System.out.println(" Word guessed correctly: " + guessWord);
+	        
+	        return false;
+	    }
+
+	    
+	    currentColumn = -1;
+	    currentRow++;
+	    guess = new char[columnCount];
+
+	    
+	    return currentRow < maximumRows;
 	}
 	
 	
@@ -118,11 +133,11 @@ public class WordleModel extends AbstractModel {
 		int countInWord = 0;
 		int alreadyMatched = 0;
 		
-		// count how many of that letter are in the current word
+		
 		for (char c : currentWord) {
 			if (c == letter) countInWord++;
 		}
-		// this'll count how many of that letter have already been guessed correctly or marked yellow earlier
+		
 		for (int i = 0; i < column; i++) {
 	        if (guess[i] == letter &&
 	           (grid[currentRow][i] != null &&

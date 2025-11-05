@@ -43,7 +43,7 @@ public class AbsurdleModelTestGenerated {
         model.incrementCurrentStreak();
         model.resetCurrentStreak();
 
-        assertNotNull(model.getStatistics(), "Statistics object should not be null.");
+        assertNotNull(model.calculateArrayOfWins(), "Statistics object should not be null.");
     }
 
     @Test

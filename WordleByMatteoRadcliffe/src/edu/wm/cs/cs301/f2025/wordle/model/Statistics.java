@@ -20,6 +20,7 @@ import java.util.logging.*;
 public class Statistics {
 	
 	
+	
 	private int currentStreak, longestStreak, totalGamesPlayed;
 	
 	/** Field representing wordsGuessed. */
@@ -206,6 +207,27 @@ public class Statistics {
 	    } catch (InterruptedException e) {
 	        Thread.currentThread().interrupt();
 	    }
+	}
+	
+	public int getTotalGamesWon() {
+	    return (wordsGuessed == null) ? 0 : wordsGuessed.size();
+	}
+
+	public int getLastWin() {
+	    if (wordsGuessed == null || wordsGuessed.isEmpty()) return 0;
+	    return wordsGuessed.get(wordsGuessed.size() - 1);
+	}
+
+	public int[] calculateArrayOfWins(int maximumTries) {
+	    int[] result = new int[maximumTries];
+	    if (wordsGuessed == null) return result;
+
+	    for (int g : wordsGuessed) {
+	        if (g >= 1 && g <= maximumTries) {
+	            result[g - 1]++;
+	        }
+	    }
+	    return result;
 	}
 
 }

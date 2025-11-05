@@ -55,6 +55,7 @@ public class StatisticsDialog extends JDialog {
 		setVisible(true);
 	}
 	
+	
 	/**
      * createMainPanel method performs its core logic or handles UI actions as defined.
      * @return result of the operation
@@ -159,11 +160,11 @@ public class StatisticsDialog extends JDialog {
 		// Configure a property—group related setters so defaults are easy to audit.
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
 		
-		int totalGamesPlayed = model.getStatistics().getTotalGamesPlayed();
-		int currentStreak = model.getStatistics().getCurrentStreak();
-		int longestStreak = model.getStatistics().getLongestStreak();
-		List<Integer> wordsGuessed = model.getStatistics().getWordsGuessed();
-		int percent = (wordsGuessed.size() * 1000 + 5) / (totalGamesPlayed * 10);
+		int totalGamesPlayed = model.getTotalGamesPlayed();
+		int currentStreak = model.getCurrentStreak();
+		int longestStreak = model.getLongestStreak();
+		int[] wordsGuessedArray = model.calculateArrayOfWins();
+		int percent = (wordsGuessedArray.length * 1000 + 5) / (totalGamesPlayed * 10);
 		
 		// Compose structure/UI: adding here establishes parent-child ownership and lifecycle.
 		panel.add(createStatisticsPanel(totalGamesPlayed, "Played", ""));

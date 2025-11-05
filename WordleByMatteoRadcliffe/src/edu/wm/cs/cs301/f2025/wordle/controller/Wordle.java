@@ -7,6 +7,7 @@ import edu.wm.cs.cs301.f2025.wordle.model.WordleModel;
 import edu.wm.cs.cs301.f2025.wordle.model.AbsurdleModel;
 import edu.wm.cs.cs301.f2025.wordle.view.WordleFrame;
 import edu.wm.cs.cs301.f2025.wordle.model.AbstractModel;
+
 /**
  * The Wordle class represents the Wordle component of the Wordle application.
  * It is responsible for handling its respective UI or logic functionality within the game.
@@ -64,7 +65,6 @@ public class Wordle implements Runnable {
         if (selectedModel instanceof AbstractModel) {
             ((AbstractModel) selectedModel).setAcceptanceRule(chain);
         }
-        selectedModel.setWordList(java.util.Arrays.asList("APPLE", "GRAPE", "LEMON", "BERRY", "MANGO"));
         selectedModel.initialize();
         
  

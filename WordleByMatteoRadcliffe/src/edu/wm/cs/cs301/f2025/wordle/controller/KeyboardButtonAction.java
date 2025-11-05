@@ -51,16 +51,27 @@ public class KeyboardButtonAction extends AbstractAction {
 	}
 
 	private void processEnter() {
-	    if (model.getCurrentColumn() < model.getColumnCount() - 1) { 
-	    		return;
-	}
-
 	    
+	    char[] guess = model.getGuess();
+	    boolean hasEmpty = false;
+	    for (char c : guess) {
+	        if (c == '\0' || c == ' ') {
+	            hasEmpty = true;
+	            break;
+	        }
+	    }
+	    if (hasEmpty) {
+	        System.out.println("Cannot submit: incomplete guess");
+	        return;
+	    }
+
 	    boolean moreRows = model.setCurrentRow();
 	    WordleResponse[] row = model.getCurrentRow();
 	    if (row == null) return;
+
 	    int greens = updateKeyboardColors(row);
 
+	   
 	    if (greens == model.getColumnCount()) {
 	        handleWin();
 	    } else if (!moreRows) {
@@ -69,8 +80,6 @@ public class KeyboardButtonAction extends AbstractAction {
 	        view.repaintWordleGridPanel();
 	        view.getKeyboardPanel().updateTotalLabel();
 	    }
-	    
-	    
 	}
 
 	

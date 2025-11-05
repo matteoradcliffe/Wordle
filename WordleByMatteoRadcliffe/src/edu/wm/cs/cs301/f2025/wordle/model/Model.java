@@ -100,11 +100,6 @@ public interface Model {
 	 */
 	int getTotalWordCount();
 
-	/**
-	 * getStatistics method performs its core logic or handles UI actions as defined.
-	 * @return result of the operation
-	 */
-	Statistics getStatistics();
 
 	//Law of delimeter helpers
 	void incrementTotalGamesPlayed();
@@ -114,5 +109,17 @@ public interface Model {
 	void incrementCurrentStreak();
 
 	void resetCurrentStreak();
+	
+	void saveDataToFile();
+
+	int getTotalGamesPlayed();
+
+	int getCurrentStreak();
+
+	int getLongestStreak();
+
+	int getTotalGamesWon();
+	
+	int[] calculateArrayOfWins();
 
 }

@@ -3,8 +3,15 @@ import edu.wm.cs.cs301.f2025.wordle.model.rules.AcceptanceRule;
 
 import java.util.*;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractModel implements Model{
+	
 	
 	protected AcceptanceRule rule;
 
@@ -21,7 +28,7 @@ public abstract class AbstractModel implements Model{
 	
 	@Override
 	public char[] getGuess() {
-	    // return a copy so rules can't mutate internal state
+	    
 	    return java.util.Arrays.copyOf(guess, guess.length);
 	}
 	
@@ -43,18 +50,41 @@ public abstract class AbstractModel implements Model{
 	    if (rule == null) return true;
 	    boolean ok = rule.isAcceptableGuess(this);
 	    if (!ok) {
-	        clearCurrentRowInput();   // reject & allow retyping in same row
+	        clearCurrentRowInput();   
 	    }
 	    return ok;
 	}
 	
 	@Override
 	public void initialize() {
-		grid = new WordleResponse[maximumRows][columnCount];
-		currentColumn = -1;
-		currentRow = 0;
-		guess = new char[columnCount];
-		generateCurrentWord();
+	    if (wordList == null || wordList.isEmpty()) {
+	        wordList = loadWordsFromFile("usa.txt");
+	    }
+
+	    grid = new WordleResponse[maximumRows][columnCount];
+	    currentColumn = -1;
+	    currentRow = 0;
+	    guess = new char[columnCount];
+	    generateCurrentWord();
+	}
+	
+	private List<String> loadWordsFromFile(String filename) {
+	    List<String> words = new ArrayList<>();
+	    File file = new File("src/resources/" + filename);
+	    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            line = line.trim().toUpperCase();
+	            if (!line.isEmpty()) {
+	                words.add(line);
+	            }
+	        }
+	        System.out.println("sucessfully read " + words.size() + " words from " + filename);
+	    } catch (Exception e) {
+	        System.err.println("error loadin word list: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    return words;
 	}
 	
 	@Override
@@ -100,6 +130,38 @@ public abstract class AbstractModel implements Model{
         return rule;
     }
 	
+	public int getTotalGamesWon() {
+	    return statistics.getTotalGamesWon();
+	}
+
+	public int getLastWin() {
+	    return statistics.getLastWin();
+	}
+
+	public int[] calculateArrayOfWins() {
+	    return statistics.calculateArrayOfWins(6);
+	}
+	@Override
+	public void saveDataToFile() {
+	    statistics.writeStatistics();
+	}
+
+	@Override
+	public int getTotalGamesPlayed() {
+	    return statistics.getTotalGamesPlayed();
+	}
+
+	@Override
+	public int getCurrentStreak() {
+	    return statistics.getCurrentStreak();
+	}
+
+	@Override
+	public int getLongestStreak() {
+	    return statistics.getLongestStreak();
+	}
+	
+	
 	@Override
     public abstract void generateCurrentWord();
     @Override
@@ -117,7 +179,7 @@ public abstract class AbstractModel implements Model{
     @Override public void resetCurrentStreak() { statistics.setCurrentStreak(0); }
     @Override public int getCurrentColumn() { return currentColumn; }
     @Override public int getTotalWordCount() { return wordList.size(); }
-    @Override public Statistics getStatistics() { return statistics; }
+    protected Statistics getStatistics() { return statistics; }
     
 	
 	

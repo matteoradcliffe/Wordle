@@ -149,7 +149,7 @@ public class WordleFrame {
      * shutdown method performs its core logic or handles UI actions as defined.
      */
 	public void shutdown() {
-		model.getStatistics().writeStatistics();
+		model.saveDataToFile();
 		frame.dispose();
 		System.exit(0);
 	}

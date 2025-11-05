@@ -46,7 +46,7 @@ public class DistributionPanel extends JPanel {
 		this.counts = new int[model.getMaximumRows()];
 		
 		// Loop over a known range/collection; watch indices and ensure side effects are intentional.
-		for (int value : model.getStatistics().getWordsGuessed()) {
+		for (int value : model.calculateArrayOfWins()) {
 			counts[value]++;
 			lastValue = value;
 		}
@@ -102,7 +102,7 @@ public class DistributionPanel extends JPanel {
 
 			// Decision point: branch based on this condition—explain why it matters for state flow.
 			if (index == lastValue
-					&& model.getStatistics().getCurrentStreak() > 0) {
+					&& model.getCurrentStreak() > 0) {
 				// Configure a property—group related setters so defaults are easy to audit.
 				g2d.setColor(AppColors.GREEN);
 			} else {
