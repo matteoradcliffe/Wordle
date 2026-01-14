@@ -1,0 +1,8 @@
+# Ignore generated documentation
+docs/** linguist-vendored
+**/apidocs/** linguist-vendored
+target/** linguist-vendored
+build/** linguist-vendored
+
+# Ignore other generated files (optional but common)
+*.class linguist-vendored
