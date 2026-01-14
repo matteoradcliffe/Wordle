@@ -1,3 +1,10 @@
-edu.wm.cs.cs301.f2025.wordle.controller
-edu.wm.cs.cs301.f2025.wordle.model
-edu.wm.cs.cs301.f2025.wordle.view
+com.carlcard.simulator.app
+com.carlcard.simulator.controller
+com.carlcard.simulator.io
+com.carlcard.simulator.model
+com.carlcard.simulator.model.event
+com.carlcard.simulator.strategies.interest
+com.carlcard.simulator.strategies.payment
+com.carlcard.simulator.test
+com.carlcard.simulator.util
+com.carlcard.simulator.view
