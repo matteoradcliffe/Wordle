@@ -14,6 +14,9 @@ A Java implementation of the popular Wordle word game developed as part of a sof
 - Java
 - Swing
 - JUnit
+- HTML
+- CSS
+- JavaScript
 
 ## What I Learned
 - Object-oriented programming
